@@ -1,8 +1,6 @@
 from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
 
-
-
 app = FastAPI()
 
 templates = Jinja2Templates(directory="")
@@ -11,5 +9,6 @@ templates = Jinja2Templates(directory="")
 async def get(request: Request):
     return templates.TemplateResponse(
         "index.html",
-        {"request": request}
+        {"request": request, 
+        "ola": FIRST_SECRET}
         )
