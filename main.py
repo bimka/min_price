@@ -1,8 +1,14 @@
+import os
+
 from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI()
-FIRST_SECRET= '123'
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 templates = Jinja2Templates(directory="")
 
@@ -11,5 +17,6 @@ async def get(request: Request):
     return templates.TemplateResponse(
         "index.html",
         {"request": request, 
-        "ola": FIRST_SECRET}
+        "bella": os.getenv('SECRET_KEY'),
+        "YANDEX_MAPS_API_KEY": os.getenv('YANDEX_MAPS_API_KEY'),}
         )
