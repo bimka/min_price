@@ -57,8 +57,13 @@ function init() {
                     // В качестве контента балуна задаем строку с адресом объекта.
                     balloonContent: firstGeoObject.getAddressLine()
                 });
+
+            // выводим полученный адрес в консоль
             console.log("myPlacemark: ")
-            console.log(myPlacemark.properties._data.balloonContent)
+            console.log(firstGeoObject.getAddressLine())
+
+            // выводим полученный адрес обратно в html документ
+            document.getElementById("ola").innerHTML = firstGeoObject.getAddressLine()
         });
     }
 }
