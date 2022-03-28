@@ -57,13 +57,41 @@ function init() {
                     // В качестве контента балуна задаем строку с адресом объекта.
                     balloonContent: firstGeoObject.getAddressLine()
                 });
-
-            // выводим полученный адрес в консоль
-            console.log("myPlacemark: ")
-            console.log(firstGeoObject.getAddressLine())
-
+                
+                
+            // подтвердим адрес пользователя: улица и дом 
+            if (window.confirm("Ваш адрес " + firstGeoObject.getThoroughfare() + ", " + firstGeoObject.getPremiseNumber() + "?")) {   
             // выводим полученный адрес обратно в html документ
-            document.getElementById("ola").innerHTML = firstGeoObject.getAddressLine()
+            // document.getElementById("address_confirm").innerHTML = firstGeoObject.getThoroughfare() + ", " + firstGeoObject.getPremiseNumber();
+                document.getElementById("address_confirm").innerHTML = firstGeoObject.getThoroughfare() + ", " + firstGeoObject.getPremiseNumber()
+                document.getElementById("adress_box").style.visibility = 'visible';
+                
+                /*
+                let coord_data = fetch('adress.json').then(function(response) {  
+                    console.log(coords);  
+                    // сериализируем координаты доставки
+                    let json = JSON.stringify(coords); 
+                    console.log(json);
+                });\
+                
+
+                var ws = new WebSocket("ws://localhost:8080/ws");
+                ws.onmessage = function(event) {
+                    var message = document.getElementById('shop-box')
+                    //var message = document.createElement('p')
+                    var content = document.createTextNode(event.data)
+                    message.appendChild(content)
+                    //messages.appendChild(message)
+            };
+                function sendMessage(event) {
+                    var input = 'ola';
+                    ws.send(input)
+                    input.value = ''
+                    event.preventDefault()
+            }
+            */
+            }
+            
         });
     }
 }

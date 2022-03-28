@@ -13,19 +13,35 @@
     <p class="header">Кликните по карте, чтобы указать адрес</p>
     <div id="map" style="width: 600px; height: 400px"></div>
     <div id="adress_box">Ищем доставку по адресу <span id="address_confirm"></span></div>
-    <div id="shop-box"><p>shop-box</p></div>
+    блок полученный с сервера: <div id="shop-box"></div>
 
 
-<script> 
-let response = await fetch(url);
+    <h1>WebSocket Chat</h1>
+    <form action="" onsubmit="sendMessage(event)">
+        <input type="text" id="messageText" autocomplete="off"/>
+        <button>Send</button>
+    </form>
+    <ul id='messages'>
+    </ul>
+    <script>
+        var ws = new WebSocket("ws://localhost:8080/ws");
+        ws.onmessage = function(event) {
+            var message = document.getElementById('shop-box')
+            //var message = document.createElement('li')
+            var content = document.createTextNode(event.data)
+            //message.appendChild(content)
+            message.appendChild(content)
+        };
+        /*function sendMessage(event) {
+            var input = 'ola'
+            ws.send(input)
+            input.value = ''
+            event.preventDefault()
+        }*/
+        .then( function(event)) {
+          
+        }
+    </script>
 
-if (address_confirm) { // если HTTP-статус в диапазоне 200-299
-  // получаем тело ответа (см. про этот метод ниже)
-  let json = await response.json();
-  consol.log('response.ok')
-} else {
-  alert("Ошибка HTTP: " + response.status);
-} 
-</script>
 </body>
 </html>
