@@ -13,34 +13,40 @@
     <p class="header">Кликните по карте, чтобы указать адрес</p>
     <div id="map" style="width: 600px; height: 400px"></div>
     <div id="adress_box">Ищем доставку по адресу <span id="address_confirm"></span></div>
-    блок полученный с сервера: <div id="shop-box"></div>
+    блок полученный с сервера: <span id="shop-box">{{ ola }}</span>
 
 
-    <h1>WebSocket Chat</h1>
-    <form action="" onsubmit="sendMessage(event)">
-        <input type="text" id="messageText" autocomplete="off"/>
-        <button>Send</button>
-    </form>
-    <ul id='messages'>
-    </ul>
     <script>
-        var ws = new WebSocket("ws://localhost:8080/ws");
-        ws.onmessage = function(event) {
-            var message = document.getElementById('shop-box')
-            //var message = document.createElement('li')
-            var content = document.createTextNode(event.data)
-            //message.appendChild(content)
-            message.appendChild(content)
-        };
-        /*function sendMessage(event) {
-            var input = 'ola'
-            ws.send(input)
-            input.value = ''
-            event.preventDefault()
-        }*/
-        .then( function(event)) {
-          
+        address_confirm.oninput = function() {
+            alert('onimput ON');
         }
+        let element = document.getElementById('address_confirm');
+        let cssObj = window.getComputedStyle(element);
+        if (cssObj.getPropertyValue("visibility") == 'visible') {
+            alert('div is  display!!!');
+        }
+        
+        /*
+        window.onload =  async function() {
+            //let user = {
+            //name: 'Dima'
+            //};
+            let response = await fetch('http://127.0.0.1:8080/', {
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(visibility)
+            })
+            .then(response => response.json()
+            .then(data => {
+                document.querySelector('#shop-box').innerHTML = data.ola;
+
+            }));
+
+            let result = await response.json();
+        }
+        */
     </script>
 
 </body>
