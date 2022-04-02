@@ -65,6 +65,28 @@ function init() {
             // document.getElementById("address_confirm").innerHTML = firstGeoObject.getThoroughfare() + ", " + firstGeoObject.getPremiseNumber();
                 document.getElementById("address_confirm").innerHTML = firstGeoObject.getThoroughfare() + ", " + firstGeoObject.getPremiseNumber()
                 document.getElementById("adress_box").style.visibility = 'visible';
+
+                async function responseCoords() {
+                    let user = {
+                    name: 'Dima'
+                    };
+
+                    let response = await fetch('http://127.0.0.1:8080/', {
+                        method: 'POST', 
+                        headers: {
+                            'Content-Type': 'application/json;charset=utf-8'
+                        },
+                        body: JSON.stringify(coords)
+                    })
+                    .then(response => response.json()
+                    .then(data => {
+                        document.querySelector('#shop-box').innerHTML = data.ola;
+        
+                    }));
+        
+                    let result = await response.json();
+                }
+                responseCoords();
                 
                 /*
                 let coord_data = fetch('adress.json').then(function(response) {  
