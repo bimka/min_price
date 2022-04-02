@@ -1,6 +1,6 @@
 import os
 
-from fastapi import FastAPI, Request, WebSocket
+from fastapi import FastAPI, Request, Response
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
@@ -36,7 +36,7 @@ async def get(request: Request):
         )
 
 @app.post('/')
-async def add_address():
-    return {'ola': 'lala'}
+async def add_address(request: Request):
+    return await request.json()
 
 
