@@ -13,14 +13,15 @@
     <p class="header">Кликните по карте, чтобы указать адрес</p>
     <div id="map" style="width: 600px; height: 400px"></div>
     <div id="adress_box">Ищем доставку по адресу <span id="address_confirm"></span></div>
-    блок полученный с сервера: <span id="shop-box">{{ ola }}</span>
+    блок полученный с сервера: <span id="shop-box"></span>
 
 
-    <script>
-document.getElementById("address_confirm").addEventListener("DOMSubtreeModified", function() {
-  alert('Содержимое окна изменилось');
-});
-    </script>
 
+    <script type="text/javascript" src="./static/scripts/responseCoords.js"></script>
+    <script>        
+        document.getElementById("address_confirm").addEventListener("DOMSubtreeModified", function() {
+            responseCoords(coords);
+        });
+    </script>  
 </body>
 </html>
