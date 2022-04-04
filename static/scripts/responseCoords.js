@@ -1,9 +1,5 @@
-
 async function responseCoords(coords) {
-    let user = {
-    name: 'Dima'
-    };
-
+    // функция responseCoords отправляет на сервер координаты доставки
     let response = await fetch('http://127.0.0.1:8080/', {
         method: 'POST', 
         headers: {
