@@ -1,14 +1,19 @@
 import os
+import json
+from urllib import response
 
 from fastapi import FastAPI, Request, Response
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.encoders import jsonable_encoder
 from dotenv import load_dotenv
+
+import sbermarket_parser as sb_p
 
 load_dotenv()
 
-app = FastAPI()
+app = FastAPI(debug = True)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 templates = Jinja2Templates(directory="")
@@ -37,6 +42,10 @@ async def get(request: Request):
 
 @app.post('/')
 async def add_address(request: Request):
-    return await request.json()
+    coords = await request.json()
+    markets = sb_p.get_markets(lat = coords[0], lon = coords[1])
+    market = markets[0]
+    market = json.dumps(market)
+    return  market
 
 
