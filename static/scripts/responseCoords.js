@@ -13,8 +13,7 @@ async function responseCoords(coords) {
         console.log(markets);
         //document.querySelector('#shop-box').innerHTML = markets.id;    
         rendering_markets_list(markets);
-        //markets_json = JSON.parse(markets);
-        console.log(markets);
+        console.log(markets[0]);
 
     })    
     );
@@ -30,16 +29,11 @@ function rendering_markets_list(markets) {
     for (let i = 0, ln = markets.length; i < ln; i++) {
         let li = document.createElement('li');
         img_src = markets[i].retailer.appearance.logo_image;
-        li.innerHTML = "<img src=\"" + img_src + "\" width=\"300px\" height=\"100px\" alt=\"market_logo\">";
+        market_src = markets[i].store_id;
+        li.innerHTML = "<a href=\"/sid=" + market_src + "\"><img src=\"" + img_src + "\" width=\"300px\" height=\"100px\" alt=\"market_logo\"></a>";
         li.innerHTML += '<div class="market">'+markets[i].name+'</div>';
         li.setAttribute('id', markets[i].id);
         ul.appendChild(li);
     }
 }
 
-// попробуем передать логотип магазина
-function logo_rendering(id, img_src) {
-    let el = document.getElementById(id);
-    el.innerHTML="<img src=\"http://placehold.it/350x350\" width=\"400px\" height=\"150px\">";
-
-}
