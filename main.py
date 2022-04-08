@@ -44,8 +44,16 @@ async def get(request: Request):
 async def add_address(request: Request):
     coords = await request.json()
     markets = sb_p.get_markets(lat = coords[0], lon = coords[1])
-    market = markets[0]
-    market = json.dumps(market)
-    return  market
+    markets = json.dumps(markets)
+    return  markets
+
+@app.get("/sid={market_id}")
+async def get_store_products(market_id, request: Request):
+    return templates.TemplateResponse(
+        "static/urls/store.html",
+        {"request": request, 
+        "store_id": market_id}
+    )
+
 
 
