@@ -9,7 +9,7 @@ async function responseCoords(coords) {
     })    
     .then(response => response.json()    
     .then(markets => {
-        markets = JSON.parse(markets)
+        //markets = JSON.parse(markets)
         console.log(markets);
         //document.querySelector('#shop-box').innerHTML = markets.id;    
         rendering_markets_list(markets);
@@ -28,9 +28,10 @@ function rendering_markets_list(markets) {
 
     for (let i = 0, ln = markets.length; i < ln; i++) {
         let li = document.createElement('li');
-        img_src = markets[i].retailer.appearance.logo_image;
+        img_src = markets[i].logo_image;
+        console.log('img_src: ' + img_src)
         market_src = markets[i].store_id;
-        li.innerHTML = "<a href=\"/sid=" + market_src + "\"><img src=\"" + img_src + "\" width=\"300px\" height=\"100px\" alt=\"market_logo\"></a>";
+        li.innerHTML = "<a href=\"/" + markets[i].retailer + "/sid=" + market_src + "\"><img src=\"" + img_src + "\" width=\"300px\" height=\"100px\" alt=\"market_logo\"></a>";
         li.innerHTML += '<div class="market">'+markets[i].name+'</div>';
         li.setAttribute('id', markets[i].id);
         ul.appendChild(li);
