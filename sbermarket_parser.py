@@ -28,4 +28,4 @@ if __name__ == "__main__":
     lat = 55.75503467371233
     lon = 37.64715556103516
     sb_markets = get_markets(lat, lon)
-    print(sb_markets[0])
+    print(type(sb_markets[0]))
