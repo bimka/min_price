@@ -8,9 +8,12 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
+from typing import List
 from dotenv import load_dotenv
+from requests import request
 
 import sbermarket_parser as sb_p
+import product_categories as p_cat
 
 load_dotenv()
 
@@ -32,12 +35,19 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
 class Market(BaseModel):
     id: str
     store_id: int
     name: str
     logo_image: str
     retailer: str
+
+class Stores(BaseModel):
+    markets: List[Market]
+
+list_markets = []
 
 @app.get("/")
 async def get(request: Request):
@@ -55,7 +65,7 @@ async def add_address(request: Request):
     markets = json.dumps(markets)
     return  markets
     '''
-    list_markets = []
+    #list_markets = []
     for market in markets:
         raw_market = {
             'id' : market['id'],
@@ -70,11 +80,19 @@ async def add_address(request: Request):
     
 
 @app.get("/{market_name}/sid={market_id}", response_model=Market)
-async def get_store_products(market_name, market_id, request: Request):
-    return templates.TemplateResponse(
-        "static/urls/store.html",
-        {"request": request, 
-        "market_id": market_id, 
-        "market_name": market_name,}
-    )
-
+async def get_store_products(request: Request, market_id, market_name):
+    '''Функция отправляет список категорий продаваемых товаров для
+       магазина по market_id    
+    '''
+    # Найдем конкретный магазин из всех объектов
+    for market in list_markets:
+        if market.store_id == int(market_id):  
+            categories = p_cat.get_categories(market_id)          
+            return templates.TemplateResponse(
+                "static/urls/store.html",
+                {"request": request, 
+                "store_id": market_id, 
+                "market_name": market_name,
+                'categories': categories, 
+                }
+            )

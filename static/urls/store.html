@@ -1,3 +1,11 @@
 <h1>Ola!!</h1>
 hello world   
 {{ store_id }}
+{{ market_name }}
+{% if categories %}
+    <ul>
+    {% for category in categories %}
+    <li>{{ category.name }}</p>
+    {% endfor %}
+    </ul>
+{% endif %}
