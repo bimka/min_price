@@ -91,8 +91,7 @@ async def get_store_products(request: Request, market_id, market_name):
             return templates.TemplateResponse(
                 "static/urls/store.html",
                 {"request": request, 
-                "store_id": market_id, 
-                "market_name": market_name,
                 'categories': categories, 
+                'market': market, 
                 }
             )
