@@ -61,11 +61,6 @@ async def get(request: Request):
 async def add_address(request: Request):
     coords = await request.json()
     markets = sb_p.get_markets(lat = coords[0], lon = coords[1])
-    '''
-    markets = json.dumps(markets)
-    return  markets
-    '''
-    #list_markets = []
     for market in markets:
         raw_market = {
             'id' : market['id'],
@@ -95,3 +90,10 @@ async def get_store_products(request: Request, market_id, market_name):
                 'market': market, 
                 }
             )
+
+@app.post('/')
+async def send_product_list(request: Request):
+    '''Функция отправляет список продуктов для данной 
+       категории товаров
+    '''
+    pass
