@@ -26,15 +26,13 @@
         </h2>
         <div id="panelsStayOpen-collapse-{{ category.id }}" class="accordion-collapse collapse" aria-labelledby="{{ category.id }}">
           <div class="accordion-body">
-            {% if categories.children %} 
-              three-thour
+            {% if category.children %} 
               <div class="accordion" id="accordionChild">
-              {% for child in categories.appearance.children %}
+              {% for child in category.children %}
                 <div class="accordion-item">
                   <h2 class="accordion-header" id="{{ child.id }}">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse-{{ child.id }}" aria-expanded="true" aria-controls="panelsStayOpen-collapse-{{ child.id }}">
-                      One-Two
-                      
+                 
                         {{ child.name }}
                     </button>
                   </h2>
@@ -55,7 +53,7 @@
     {% endfor %}
     </div>
   {% endif %}
-
+<!--
   {% if categories %}
     <div class="accordion" id="accordionParent">
     {% for category in categories %}
@@ -75,11 +73,22 @@
     {% endfor %}
     </div>
   {% endif %}
+  -->
 
 
 
-{{ market }}
 <br>
-{{ categories[0] }}
+{{ categories[0].children[0] }}
+
+<script type="text/javascript" src="./static/scripts/product_list.js"></script>
+<script>
+  /*
+        document.getElementById("address_confirm").addEventListener("DOMSubtreeModified", function() {
+            pass
+        });
+        */
+        onClick="alert(this. id);"
+</script>
+
 </body>
 </html>
