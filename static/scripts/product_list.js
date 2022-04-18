@@ -1,4 +1,4 @@
-function get():
+/*function get(id):
     // функция создает ненумерованный список с продуктами
     let div  = document.getElementById('markets');
     let ul = document.createElement('ul');
@@ -13,4 +13,22 @@ function get():
         li.setAttribute('id', markets[i].id);
         ul.appendChild(li);
     }
+}
+*/
+async function send_url(url) {
+    // функция отправляет на сервер canonical_url подкатегории с продуктами
+    let response = await fetch('http://127.0.0.1:8080/send_product_list', {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(url)
+    })    
+    .then(response => response.json()    
+    .then(products => {
+        console.log(products);  
+        //rendering_markets_list(markets);
+
+    })    
+    );
 }
