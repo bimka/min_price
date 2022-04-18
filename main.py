@@ -44,8 +44,8 @@ class Market(BaseModel):
     logo_image: str
     retailer: str
 
-class Stores(BaseModel):
-    markets: List[Market]
+class Product(BaseModel):
+    pass
 
 list_markets = []
 
@@ -75,7 +75,7 @@ async def add_address(request: Request):
     
 
 @app.get("/{market_name}/sid={market_id}", response_model=Market)
-async def get_store_products(request: Request, market_id, market_name):
+async def get_store_products(request: Request, market_id):
     '''Функция отправляет список категорий продаваемых товаров для
        магазина по market_id    
     '''
@@ -91,9 +91,10 @@ async def get_store_products(request: Request, market_id, market_name):
                 }
             )
 
-@app.post('/')
+@app.post("/send_product_list")
 async def send_product_list(request: Request):
     '''Функция отправляет список продуктов для данной 
        категории товаров
     '''
-    pass
+    url = await request.json()
+    return url
