@@ -13,7 +13,7 @@
 </head>
 <body>
   <img src="{{ market.logo_image }}" alt="market_logo">
-
+  {{ market }}
   {% if categories %}
     <div class="accordion" id="accordionParent">
     {% for category in categories %}
@@ -30,7 +30,7 @@
               <div class="accordion" id="accordionChild">
               {% for child in category.children %}
                 <div class="accordion-item">
-                  <h2 class="accordion-header" id="{{ child.id }}" onclick="give('{{ child.canonical_url }}')">
+                  <h2 class="accordion-header" id="{{ child.id }}" onclick="give('{{ child.canonical_url }}', '{{ market.store_id }}', '{{ market.retailer }}')">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse-{{ child.id }}" aria-expanded="true" aria-controls="panelsStayOpen-collapse-{{ child.id }}">
                  
                         {{ child.name }}
@@ -81,8 +81,8 @@
 
 <script type="text/javascript" src="http://localhost:8080/static/scripts/product_list.js"></script>
 <script>
-  function give(url) {
-    send_id(url);
+  function give(url, store_id, retailer) {
+    send_url(url, store_id, retailer);
   }
 </script>
 

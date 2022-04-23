@@ -14,6 +14,7 @@ from requests import request
 
 import sbermarket_parser as sb_p
 import product_categories as p_cat
+import product_list as p_list
 
 load_dotenv()
 
@@ -26,14 +27,16 @@ origins = [
     "http://localhost",
     "http://localhost:8080",
     "http://localhost:8000",
+    "http://localhost:8080/send_product_list",
 ]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["POST", "GET"],
     allow_headers=["*"],
+    max_age=3600,
 )
 
 
@@ -96,5 +99,6 @@ async def send_product_list(request: Request):
     '''Функция отправляет список продуктов для данной 
        категории товаров
     '''
-    url = await request.json()
-    return url
+    url , store_id, retailer = await request.json()
+    product_list = p_list.get_products(url, store_id, retailer)
+    return product_list
