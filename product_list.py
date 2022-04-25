@@ -6,33 +6,18 @@ from bs4 import BeautifulSoup
 def get_products(url, store_id, retailer):
     '''Функция отправляет GET-запрос, возвращая список товаров
     ''' 
-    # Сравниваем url магазина
-    '''
-    if retailer in url.split('/'):
-        print(retailer, ' is worked!!')
-        moditify_url = f'https://sbermarket.ru/api/stores/{ retailer }'.format()
-        moditify_url = url    
-    # https://sbermarket.ru/dixy/c/paskha_new/iaitsa
-    '''
-    #else:
-        # Заменим в полученном url на api
-    #if retailer == 'globus':
-
     split_url = url.split('/')
     inserts = []
+    
     for i in split_url[::-1]:
         if i != 'categories':
              inserts.append(i)
         else:
+            inserts.append(store_id)
             break
-    inserts            
-    category = split_url[-2]
-    subcategory = split_url[-1]
-    moditify_url = f"https://sbermarket.ru/api/stores/{ store_id }/products?tid={ category }/{ subcategory }&page=1&per_page=100&sort=popularity".format()
-    moditify_url = 'https://sbermarket.ru/api/stores/1950/products?tid=paskha/iaitsa&page=1&per_page=100&sort=popularity'
-    print(split_url)
-        #moditify_url = "https://sbermarket.ru/api/stores/12516/products?tid=moloko-iaitsa-new/moloko&page=1&per_page=100&sort=popularity"
-        
+    inserts = inserts[::-1]         
+    moditify_url = make_path(inserts)
+     
     r = requests.get(
             moditify_url, 
             headers={
@@ -55,20 +40,19 @@ def get_products(url, store_id, retailer):
             }
             )
     data = r.json()
-    print(moditify_url)
-    #return data['products']
-    return data
+    return data['products']    
+
+def make_path(*args):
+    '''Функция собирает url
+    '''
+    store_id = args[0][0]
+    path_vars = '/'.join(args[0][1:])
+    return f"https://sbermarket.ru/api/stores/{ store_id }/products?tid={ path_vars }&page=1&per_page=100&sort=popularity"
 
 if __name__ == "__main__":
-    url = 'https://sbermarket.ru/api/stores/10/products?tid=moloko-iaitsa-new/moloko&page=1&per_page=100&sort=popularity'
-    store_id = str(12516)
+    url = 'https://sbermarket.ru/api/stores/10/products?tid=moloko-iaitsa-new/moloko&page=1&per_page=24&sort=popularity'
+    store_id = str(1373)
     retailer = 'dixy'
-    url = 'https://sbermarket.ru/api/stores/1950/products?tid=paskha/iaitsa&page=1&per_page=100&sort=popularity'
-    
+    url = 'https://sbermarket.ru/globus/c/katalogh-globus/sobstviennoie-proizvodstvo/piekarnia'
     products = get_products(url, store_id, retailer)
     print(products)
-
-#['https:', '', 'sbermarket.ru', 'categories', 'paskha_new', 'iaitsa']    
-#https://sbermarket.ru/api/stores/3634/products?tid=paskha_new/iaitsa&page=1&per_page=100&sort=popularity
-
-# https://sbermarket.ru/api/stores/1950/products?tid=katalogh-globus/paskha/iaitsa&page=2&per_page=20&sort=popularity
