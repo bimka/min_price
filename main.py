@@ -99,6 +99,6 @@ async def send_product_list(request: Request):
     '''Функция отправляет список продуктов для данной 
        категории товаров
     '''
-    url , store_id, retailer = await request.json()
-    product_list = p_list.get_products(url, store_id, retailer)
+    url , store_id = await request.json()
+    product_list = p_list.get_products(url, store_id)
     return product_list
