@@ -3,7 +3,7 @@ from unicodedata import category
 import requests
 from bs4 import BeautifulSoup
 
-def get_products(url, store_id, retailer):
+def get_products(url, store_id):
     '''Функция отправляет GET-запрос, возвращая список товаров
     ''' 
     split_url = url.split('/')
@@ -52,7 +52,6 @@ def make_path(*args):
 if __name__ == "__main__":
     url = 'https://sbermarket.ru/api/stores/10/products?tid=moloko-iaitsa-new/moloko&page=1&per_page=24&sort=popularity'
     store_id = str(1373)
-    retailer = 'dixy'
     url = 'https://sbermarket.ru/globus/c/katalogh-globus/sobstviennoie-proizvodstvo/piekarnia'
-    products = get_products(url, store_id, retailer)
+    products = get_products(url, store_id)
     print(products)
