@@ -12,7 +12,14 @@
 
 </head>
 <body>
-  <img src="{{ market.logo_image }}" alt="market_logo">
+  <nav class="navbar sticky-top navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Sticky top</a>
+      <img src="{{ market.logo_image }}" alt="market_logo">
+      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Корзина</button>
+    </div>
+  </nav>
+  
   {{ market }}
   {% if categories %}
     <div class="accordion" id="accordionParent">
@@ -38,8 +45,8 @@
                   </h2>
                   <div id="panelsStayOpen-collapse-{{ child.id }}" class="accordion-collapse collapse" aria-labelledby="{{ child.id }}">
                     <div class="accordion-body" >
-                      <div  id = 'products-{{ child.id }}'  style="height:100px;">
-
+                      <div  id = 'products-{{ child.id }}' class="card-group row row-cols-xs-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 row-cols-xl-8 row-cols-xxl-10 ">
+                        
                       </div>
                     </div>
                   </div>
@@ -59,6 +66,16 @@
     </div>
   {% endif %}
 
+  <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Товары в корзине</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Закрыть"></button>
+    </div>
+    <div class="offcanvas-body">
+      <p>Попробуйте прокрутить оставшуюся часть страницы, чтобы увидеть этот параметр в действии.</p>
+    </div>
+  </div>
+  
 <script type="text/javascript" src="http://localhost:8080/static/scripts/product_list.js"></script>
 <script>
   function give(url, store_id, category_id) {
