@@ -47,6 +47,15 @@
                     <div class="accordion-body" >
                       <div  id = 'products-{{ child.id }}' class="card-group row row-cols-xs-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 row-cols-xl-8 row-cols-xxl-10 ">
                         
+                        <!--<div class='card'>
+                          <img src='' class='card-img-top'>
+                          <div class='card-body'>
+                              <h5 class='card-title'>{{ child.name }}</h5>
+                              <p class='card-text'>{{ child.price}} руб</p>
+                              <button type='button' class='btn btn-outline-primary' data-name=product_name onclick='add_to_cart()'>Добавить в корзину</button>\
+                          </div>
+                          </div>-->
+
                       </div>
                     </div>
                   </div>
@@ -54,8 +63,7 @@
               {% endfor %}
             </div>
             {% else %}
-            <div ></div>
-            <div  id = 'products-{{ category.id }}'>
+            <div  id = 'products-{{ category.id }}' class="card-group row row-cols-xs-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 row-cols-xl-8 row-cols-xxl-10" >
 
             </div>
             {% endif %}
@@ -80,6 +88,16 @@
 <script>
   function give(url, store_id, category_id) {
     send_url(url, store_id, category_id);
+}
+</script>
+
+<script>
+  function add_to_cart(id, name, price){
+    //let ul = document.getElementsByClassName('offcanvas-body')[0];
+    //console.log(ul);
+    while (true) {
+      console.log('ola');
+    }
   }
 </script>
 
