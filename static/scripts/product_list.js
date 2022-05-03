@@ -11,37 +11,39 @@ async function send_url(url, store_id, category_id) {
     .then(response => response.json()    
     .then(products => {
         console.log(products, category_id);  
-        rendering_markets_list(products, category_id);
+        rendering_markets_cards(products, category_id);
 
-    })    
+    })     
     );
 }
 
-function rendering_markets_list(products, category_id) {
-    // функция создает ненумерованный список с продуктами
+function rendering_markets_cards(products, category_id) {
+    // функция создает картточки с продуктами
     let div  = document.getElementById('products-' + category_id);
-    //let div_card_group = document.createElement('div');
-    //div.appendChild(div);
 
     for (let i = 0, ln = products.length; i < ln; i++) {
-        let div_card = document.createElement('div');
-        img_src = products[i].image_urls[0];
+        let div_card = document.createElement('div');        
+        id = products[i].id;
         product_name = products[i].name;
         price = products[i].price;
         image = products[i].image_urls[0]
+        
         div_card.innerHTML = "<div class='card'>\
                               <img src="+image+" class='card-img-top'>\
                               <div class='card-body'>\
                                   <h5 class='card-title'>"+product_name+"</h5>\
                                   <p class='card-text'>"+price+" руб</p>\
-                                  <button type='button' class='btn btn-outline-primary'>Добавить в корзину</button>\
+                                  <button type='button' class='btn btn-outline-primary' \
+                                    data-id="+id+" data-name="+product_name+" \
+                                    data-price="+price+" \
+                                    onclick='add_to_cart(this.dataset.id, this.dataset.name, \
+                                        this.dataset.price)'>\
+                                        Добавить в корзину\
+                                  </button>\
                               </div>\
                               </div>";
-                              
-        //div_card.innerHTML = "ola";
-        //li.innerHTML += "<img src="+image+" class='img-fluid' alt='Изображение товара'>";
-        div_card.setAttribute('id', products[i].legacy_product_id);
 
+        div_card.setAttribute('id', products[i].legacy_product_id);
         div_card.setAttribute('class', 'col');
         div.appendChild(div_card);
     }
