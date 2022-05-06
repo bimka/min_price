@@ -47,15 +47,6 @@
                     <div class="accordion-body" >
                       <div  id = 'products-{{ child.id }}' class="card-group row row-cols-xs-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 row-cols-xl-8 row-cols-xxl-10 ">
                         
-                        <!--<div class='card'>
-                          <img src='' class='card-img-top'>
-                          <div class='card-body'>
-                              <h5 class='card-title'>{{ child.name }}</h5>
-                              <p class='card-text'>{{ child.price}} руб</p>
-                              <button type='button' class='btn btn-outline-primary' data-name=product_name onclick='add_to_cart()'>Добавить в корзину</button>\
-                          </div>
-                          </div>-->
-
                       </div>
                     </div>
                   </div>
@@ -81,11 +72,10 @@
     </div>
     <div class="offcanvas-body">
       <ul id="shoping_cart_list">
-
       </ul>
       <p id="total_price">
-
       </p>
+      <a class="btn btn-primary" href="http://localhost:8080/static/urls/compare.html" role="button">Сравнить цену</a>
     </div>
   </div>
   
@@ -111,7 +101,7 @@
                     </button>`;
     ul.appendChild(li);
     let p = document.getElementById('total_price');
-    p.innerHTML = `Итог: ${pluser()} руб`;
+    p.innerHTML = `Итог: <span id='price'>${pluser()}</span> руб`;
 
   }
 
@@ -127,8 +117,13 @@
   }
 
   function del_from_cart(id){
-    let el = document.getElementById(id);
-    el.remove();
+    // функция удаляет удаляет элемент списка с товаром и вычитает его
+    // стоимость из общей суммы
+    let parent = document.querySelector('#'+id);
+    let child = parent.querySelector('.cart_price');
+    let minus = document.getElementById('price');
+    minus.innerHTML -= child.textContent;
+    parent.remove();
   }
 </script>
 
