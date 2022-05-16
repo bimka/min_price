@@ -22,7 +22,8 @@
       <a class="navbar-brand" href="#">Sticky top</a>
       <img src="{{ market.logo_image }}" alt="market_logo">
       <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" 
-        data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+        data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"
+        onclick="cart()">
         Корзина
       </button>
     </div>
@@ -124,46 +125,22 @@
 </script>
 
 <script type="text/javascript">
-  
-  function add_to_cart(id, product_name, price){
-    // функция отрисовывает товары в корзине
-    let ul  = document.getElementById('shoping_cart_list');
-    let li = document.createElement('li');
-    li.setAttribute('id', `product_cart_id_${id}`);
-    li.innerHTML = `
-                    ${product_name} - 
-                    <span class='cart_price'> ${price}</span> руб   
-                    <button type='button' class='btn btn-outline-primary' 
-                      onclick='del_from_cart(this.parentNode.id)'>
-                      X
-                    </button>`;
-    ul.appendChild(li);
-    let p = document.getElementById('total_price');
-    p.innerHTML = `Итог: <span id='price'>${pluser()}</span> руб`;
-
-  }
 
   function pluser(){
     // функция возвращает сумму цены товаров в корзине
-    var els = document.getElementsByClassName('cart_price');
-    return Array.prototype.slice.call(els).reduce( addMe, 0);
+    let total_price = 0;
+    for (let i = 0; i < cart_list.length; i++) {
+      total_price += parseFloat(cart_list[i].price);
+    }
+    return total_price.toFixed(2);
   }
 
-  function addMe(p,c){
-    // p - предыдущее значение общей суммы, c - очередной элемент массива
-    return p + parseFloat(c.textContent);
-  }
+  function go_to_comparison(){
+    // функция готовит GET-запрос с продуктами из корзины и переводит 
+    // на страницу сравнения
+    console.log(cart_list);
 
-  function del_from_cart(id){
-    // функция удаляет удаляет элемент списка с товаром и вычитает его
-    // стоимость из общей суммы
-    let parent = document.querySelector('#'+id);
-    let child = parent.querySelector('.cart_price');
-    let minus = document.getElementById('price');
-    minus.innerHTML -= child.textContent;
-    parent.remove();
   }
-
   class Product_on_basket {
     // класс содержит характеристики продукта в корзине 
     static counter = 0;
@@ -174,7 +151,37 @@
       this.price = price;
       ++Product_on_basket.counter;
     }
+  }
 
+  function cart(){
+    // функция отрисовывает содержимое корзины: список продуктов и 
+    // общую цену
+    let ul  = document.getElementById('shoping_cart_list');
+    ul.innerHTML = '';
+    for (product in cart_list) {    
+    let li = document.createElement('li');
+    li.setAttribute('id', `product_cart_id_${cart_list[product].id}`);
+    li.innerHTML = `
+                    ${cart_list[product].name} - 
+                    <span class='cart_price'> ${cart_list[product].price}</span> руб   
+                    <button type='button' class='btn btn-outline-primary' 
+                      onclick='cart_list.splice(product); cart(); console.log(cart_list.length)'
+                      >
+                      X
+                    </button>`;
+    ul.appendChild(li);
+    let p = document.getElementById('total_price');
+      p.innerHTML = `Итог: <span id='price'>${pluser()}</span> руб`;
+    
+  }
+  }
+
+  function add_to_cart_list(id, name, price){
+    // функция при добавлении продукта в корзину создает новый объект
+    // корзины и добавляет его в массив 
+
+    const product = new Product_on_basket(id, name, price);
+    cart_list.push(product);
   }
 
 </script>
