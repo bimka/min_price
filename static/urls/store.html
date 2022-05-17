@@ -35,11 +35,13 @@
     {% for category in categories %}
       <div class="accordion-item">
         <h2 class="accordion-header" id="{{ category.id }}" 
-          onclick="give('{{ category.canonical_url }}', '{{ market.store_id }}', '{{ category.id }}')">
+          onclick="give('{{ category.canonical_url }}', 
+            '{{ market.store_id }}', '{{ category.id }}')">
           <button class="accordion-button" type="button" 
             data-bs-toggle="collapse" 
             data-bs-target="#panelsStayOpen-collapse-{{ category.id }}" 
-            aria-expanded="true" aria-controls="panelsStayOpen-collapse-{{ category.id }}">
+            aria-expanded="true" 
+            aria-controls="panelsStayOpen-collapse-{{ category.id }}">
             <img src="{{ category.icon_url }}" alt="category image">
             {{ category.name }}
           </button>
@@ -52,7 +54,8 @@
               {% for child in category.children %}
                 <div class="accordion-item">
                   <h2 class="accordion-header" id="{{ child.id }}" 
-                    onclick="give('{{ child.canonical_url }}', '{{ market.store_id }}', '{{ child.id }}')">
+                    onclick="give('{{ child.canonical_url }}', 
+                      '{{ market.store_id }}', '{{ child.id }}')">
                     <button class="accordion-button" type="button" 
                       data-bs-toggle="collapse" 
                       data-bs-target="#panelsStayOpen-collapse-{{ child.id }}" 
@@ -89,8 +92,8 @@
     </div>
   {% endif %}
 
-  <div class="offcanvas offcanvas-start" data-bs-scroll="true" 
-    data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" 
+  <div class="offcanvas offcanvas-start" data-bs-scroll="false" 
+    data-bs-backdrop="true" tabindex="-1" id="offcanvasScrolling" 
     aria-labelledby="offcanvasScrollingLabel">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="offcanvasScrollingLabel">
@@ -138,19 +141,13 @@
   function go_to_comparison(){
     // функция готовит GET-запрос с продуктами из корзины и переводит 
     // на страницу сравнения
-    console.log(cart_list);
-
-  }
-  class Product_on_basket {
-    // класс содержит характеристики продукта в корзине 
-    static counter = 0;
-
-    constructor(id, name, price) {
-      this.id = id;
-      this.name = name;
-      this.price = price;
-      ++Product_on_basket.counter;
+    let slug_list = [];
+    for (let i = 0; i < cart_list.length; i++) {
+      slug_list.push(cart_list[i].slug);
     }
+    const request_body = slug_list.join('&');
+    window.location.href = "http://localhost:8080/compare/order=" + request_body;
+
   }
 
   function cart(){
@@ -165,23 +162,21 @@
                     ${cart_list[product].name} - 
                     <span class='cart_price'> ${cart_list[product].price}</span> руб   
                     <button type='button' class='btn btn-outline-primary' 
-                      onclick='cart_list.splice(product); cart(); console.log(cart_list.length)'
+                      onclick='cart_list.splice(product); cart()'
                       >
                       X
                     </button>`;
     ul.appendChild(li);
+    }
     let p = document.getElementById('total_price');
-      p.innerHTML = `Итог: <span id='price'>${pluser()}</span> руб`;
+    p.innerHTML = `Итог: <span id='price'>${pluser()}</span> руб`;
     
-  }
   }
 
   function add_to_cart_list(id, name, price){
-    // функция при добавлении продукта в корзину создает новый объект
-    // корзины и добавляет его в массив 
-
-    const product = new Product_on_basket(id, name, price);
-    cart_list.push(product);
+    // функция добавляет в массив объекты продуктов,
+    // добавляемых в корзину
+    cart_list.push(products.find(item => item.id == id));
   }
 
 </script>
