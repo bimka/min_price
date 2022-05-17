@@ -101,16 +101,16 @@ async def send_product_list(request: Request):
     '''
     url , store_id = await request.json()
     product_list = p_list.get_products(url, store_id)
-    print(product_list[0])
     return product_list
 
 @app.get("/compare/order={order}")
 async def compare_order(order, request: Request):
     '''Функция сравнивает заказ пользователя в разных магазинах
     '''
+    order_list = order.split('&')
     return templates.TemplateResponse(
                 "static/urls/compare.html",
                 {"request": request,
-                'order': order
+                'order_list': order_list
                 } 
     )
