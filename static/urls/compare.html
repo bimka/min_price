@@ -12,6 +12,13 @@
 
 </head>
 <body>
-
+  {% if order_list %}
+    <p>Ищем следующий набор продуктов в разных магазинах:</p>
+    <ul>
+    {% for product in order_list %}
+      <li>{{ product }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
 </body>
 </html>
