@@ -146,6 +146,7 @@
       slug_list.push(cart_list[i].slug);
     }
     const request_body = slug_list.join('&');
+    sessionStorage.setItem('cart_list', JSON.stringify(cart_list));
     window.location.href = "http://localhost:8080/compare/order=" + request_body;
 
   }
@@ -178,7 +179,7 @@
     // добавляемых в корзину
     cart_list.push(products.find(item => item.id == id));
   }
-
+  
 </script>
 
 </body>

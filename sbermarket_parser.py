@@ -28,4 +28,7 @@ if __name__ == "__main__":
     lat = 55.75503467371233
     lon = 37.64715556103516
     sb_markets = get_markets(lat, lon)
-    print(type(sb_markets[0]))
+    print(sb_markets[0])
+    '''
+    for market in sb_markets:
+        print(market['retailer']['slug'])'''
