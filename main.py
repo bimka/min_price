@@ -15,6 +15,7 @@ from requests import request
 import sbermarket_parser as sb_p
 import product_categories as p_cat
 import product_list as p_list
+import product_in_other_stores as p_other_stores
 
 load_dotenv()
 
@@ -108,6 +109,7 @@ async def compare_order(order, request: Request):
     '''Функция сравнивает заказ пользователя в разных магазинах
     '''
     order_list = order.split('&')
+    print(list_markets)
     return templates.TemplateResponse(
                 "static/urls/compare.html",
                 {"request": request,
