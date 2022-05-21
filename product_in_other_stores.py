@@ -29,24 +29,24 @@ if __name__ == "__main__":
     product = 'moloko-3-2-ul-trapasterizovannoe-925-ml-domik-v-derevne-bzmzh-f14c772'
     
     list_markets = ['21', '15434', '420', '1373'] # luk-repchatyy-1150344
-    order_list = [#'moloko-3-2-ul-trapasterizovannoe-925-ml-domik-v-derevne-bzmzh-f14c772', 
-                  #'gazirovannyy-napitok-pepsi-cola-2-l-a1ba9fc', 
-                  "goviadina-vkusvill-tushienaia"
+    order_list = ['moloko-3-2-ul-trapasterizovannoe-925-ml-domik-v-derevne-bzmzh-f14c772', 
+                  'gazirovannyy-napitok-pepsi-cola-2-l-a1ba9fc', 
+                  #"goviadina-vkusvill-tushienaia"
                   ]
     markets_true_set = [] 
     for market in list_markets:
-        confirmed_prod = []
+        confirmed_prod = [market]
         for product in order_list:
             try:
                 info = get(market, product)
                 if info['product']['offer']['price']:
+                    
                     confirmed_prod.append(info)
-                else:
-                    break
             except:
                 break
-        if len(order_list) == len(confirmed_prod):
+        if len(order_list) + 1 == len(confirmed_prod):
             markets_true_set.append(confirmed_prod)
+
     print(len(markets_true_set))
 
 
