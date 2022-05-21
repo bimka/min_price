@@ -6,33 +6,29 @@ async function responseCoords(coords) {
             'Content-Type': 'application/json;charset=utf-8'
         },
         body: JSON.stringify(coords)
-    })    
-    .then(response => response.json()    
-    .then(markets => {
-        //markets = JSON.parse(markets)
-        console.log(markets);
-        //document.querySelector('#shop-box').innerHTML = markets.id;    
-        rendering_markets_list(markets);
-
-    })    
-    );
+    }) ; 
+      markets = await response.json();
+      rendering_markets_list(markets);
 }
 
 
 function rendering_markets_list(markets) {
     // функция создает ненумерованный список с магазинами
     let div  = document.getElementById('markets');
-    let ul = document.createElement('ul');
-    div.appendChild(ul);
+    let div_row = document.createElement('div');
+    div_row.setAttribute('class', 'row row-cols-xs-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 row-cols-xl-8 row-cols-xxl-10');
+    div.appendChild(div_row);
 
     for (let i = 0, ln = markets.length; i < ln; i++) {
-        let li = document.createElement('li');
+        let div_ch = document.createElement('div');
         img_src = markets[i].logo_image;
         market_src = markets[i].store_id;
-        li.innerHTML = "<a href=\"/" + markets[i].retailer + "/sid=" + market_src + "\"><img src=\"" + img_src + "\" width=\"300px\" height=\"100px\" alt=\"market_logo\"></a>";
-        li.innerHTML += '<div class="market">'+markets[i].name+'</div>';
-        li.setAttribute('id', markets[i].id);
-        ul.appendChild(li);
+        div_ch.innerHTML = "<a href=\"/" + markets[i].retailer + "/sid=" + market_src + "\"><img src=\"" + img_src + "\" width=\"300px\" height=\"100px\" alt=\"market_logo\"></a>";
+        //div_ch.innerHTML = '<div class="market">'+markets[i].name+'</div>';
+        div_ch.setAttribute('id', markets[i].id);
+        //div_ch.setAttribute('class', );
+        div_row.appendChild(div_ch);
     }
+    div.appendChild(div_row);
 }
 
