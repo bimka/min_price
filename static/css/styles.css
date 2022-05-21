@@ -1,14 +1,39 @@
+body {
+  font-family:'Arial';
+  text-align: center;
+}
+
+header {
+  display: flex;
+}
+
+header div {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#site_logo {
+  padding : 0 200px 0 50px;
+}
+
+#address_confirm {
+  font-weight: bold;
+}
+
+#map, adress_box {
+  margin: auto;
+
+}
+
+
+
 #adress_box{
   visibility: hidden;    
   }
 
-#markets > ul > li{
-  position: relative;
-}
 
 .market{
-  position: absolute;
-  top: 20px;
+  display: inline-block;
 }
 
 .product{
