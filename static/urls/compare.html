@@ -12,18 +12,21 @@
 
 </head>
 <body>
-  <!--
-  {% if order_list %}
-    <p>Ищем следующий набор продуктов в разных магазинах:</p>
+  <p>Ищем следующий набор продуктов в разных магазинах:</p>
+  <ul id="product_list"></ul>
+
+  {% if markets_true_set %}    
     <ul>
-    {% for product in order_list %}
-      <li>{{ product }}</li>
+    {% for set in markets_true_set %}
+      <li>
+        {{ set[0].name }}: {{ set[-1]}} руб.
+      </li>
     {% endfor %}
     </ul>
   {% endif %}
-  -->
-  <ul id="product_list"></ul>
-
+  
+  
+  
 <script src="http://localhost:8080/static/scripts/product_list.js" 
   type="text/javascript">
 </script>
