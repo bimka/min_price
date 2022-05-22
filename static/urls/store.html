@@ -19,8 +19,14 @@
 <body>
   <nav class="navbar sticky-top navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Sticky top</a>
-      <img src="{{ market.logo_image }}" alt="market_logo">
+      <a class="navbar-brand" href="http://localhost:8080">
+        <div id="site_logo">
+          minimal<br>
+          delivery<br>
+          price
+        </div>
+      </a>
+      <img src="{{ market.retailer.appearance.logo_image }}" alt="market_logo" class="img-fluid mx-auto d-block" >
       <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" 
         data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"
         onclick="cart()">
