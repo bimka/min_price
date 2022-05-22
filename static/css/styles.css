@@ -1,5 +1,10 @@
+/*
 body {
   font-family:'Arial';
+  text-align: center;
+}
+*/
+p {
   text-align: center;
 }
 
@@ -13,9 +18,27 @@ header div {
 }
 
 #site_logo {
-  padding : 0 200px 0 50px;
+  padding : 0 200px 0 50px;  
+  font-size: 30px;
+  font-weight: bold;
 }
 
+.market_info {
+  width: 300px;
+  height: 100px;
+  display: block;
+  box-sizing: border-box;
+}
+
+/*
+.market_info > a{
+  width: 90px;
+  height: 30px;
+}
+*/
+a.market_info > img{
+  height: 50%;
+}
 #address_confirm {
   font-weight: bold;
 }
