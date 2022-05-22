@@ -73,28 +73,18 @@ async def add_address(request: Request):
     coords = await request.json()
     markets = sb_p.get_markets(lat = coords[0], lon = coords[1])
     global list_markets  # очищаем список перед каждым вызовом
-    list_markets = []
-    for market in markets:
-        raw_market = {
-            'id' : market['id'],
-            'store_id': market['store_id'],
-            'name': market['name'],
-            'logo_image': market['retailer']['appearance']['logo_image'],
-            'retailer': market['retailer']['slug'],
-        }
-        structured_market = Market(**raw_market)
-        list_markets.append(structured_market)
+    list_markets = markets
     return list_markets
     
 
-@app.get("/{market_name}/sid={market_id}", response_model=Market)
+@app.get("/{market_name}/sid={market_id}")
 async def get_store_products(request: Request, market_id):
     '''Функция отправляет список категорий продаваемых товаров для
        магазина по market_id    
     '''
     # Найдем конкретный магазин из всех объектов
     for market in list_markets:
-        if market.store_id == int(market_id):  
+        if market['store_id'] == int(market_id):  
             categories = p_cat.get_categories(market_id)          
             return templates.TemplateResponse(
                 "static/urls/store.html",
