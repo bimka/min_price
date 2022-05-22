@@ -13,21 +13,22 @@ async function responseCoords(coords) {
 
 
 function rendering_markets_list(markets) {
-    // функция создает ненумерованный список с магазинами
+    // функция список с блоками, содержащий магазины
     let div  = document.getElementById('markets');
     let div_row = document.createElement('div');
     div_row.setAttribute('class', 'row row-cols-xs-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 row-cols-xl-8 row-cols-xxl-10');
     div.appendChild(div_row);
 
     for (let i = 0, ln = markets.length; i < ln; i++) {
-        let div_ch = document.createElement('div');
-        img_src = markets[i].logo_image;
+        let a = document.createElement('a');        
+        img_src = markets[i].retailer.appearance.logo_image;        
         market_src = markets[i].store_id;
-        div_ch.innerHTML = "<a href=\"/" + markets[i].retailer + "/sid=" + market_src + "\"><img src=\"" + img_src + "\" width=\"300px\" height=\"100px\" alt=\"market_logo\"></a>";
-        //div_ch.innerHTML = '<div class="market">'+markets[i].name+'</div>';
-        div_ch.setAttribute('id', markets[i].id);
-        //div_ch.setAttribute('class', );
-        div_row.appendChild(div_ch);
+        a.setAttribute('href',  markets[i].retailer.slug + "/sid=" + market_src);
+        a.innerHTML = "<img src=\"" + img_src + "\"  alt=\"market_logo\">";
+        a.setAttribute('id', markets[i].id);
+        a.setAttribute('class',  'market_info');
+        a.style.backgroundColor = markets[i].retailer.appearance.background_color;
+        div_row.appendChild(a);
     }
     div.appendChild(div_row);
 }
