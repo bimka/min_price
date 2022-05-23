@@ -1,9 +1,8 @@
-/*
+
 body {
-  font-family:'Arial';
-  text-align: center;
+  padding: 0 50px;
 }
-*/
+
 p {
   text-align: center;
 }
@@ -18,29 +17,35 @@ header div {
 }
 
 #site_logo {
-  padding : 0 200px 0 50px;  
+  padding : 0 0 0 50px;  
   font-size: 30px;
   font-weight: bold;
 }
 
-.market_info {
-  width: 300px;
-  height: 100px;
-  display: block;
-  box-sizing: border-box;
+#title_block {
+  margin: auto;
 }
 
-/*
-.market_info > a{
-  width: 90px;
-  height: 30px;
+.market_info {
+  width: 350px;
+  height: 150px;
+  display: block;
+  box-sizing: border-box;
+  text-decoration: none;  
 }
-*/
+
 a.market_info > img{
   height: 50%;
 }
+
 #address_confirm {
   font-weight: bold;
+}
+
+.market_info > p {
+  text-align: left;
+  margin: 0 0 0 10px ;
+  
 }
 
 #map, adress_box {
@@ -61,5 +66,9 @@ a.market_info > img{
 
 .product{
   width: 300px;
+  height: 100px;
+}
+
+.store_logo {
   height: 100px;
 }
