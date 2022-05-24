@@ -20,10 +20,15 @@ header div {
   padding : 0 0 0 50px;  
   font-size: 30px;
   font-weight: bold;
+  color: black;
 }
 
 #title_block {
   margin: auto;
+}
+
+.site_logo_href {
+  text-decoration: none;
 }
 
 .market_info {
@@ -55,6 +60,7 @@ a.market_info > img{
 
 
 
+
 #adress_box{
   visibility: hidden;    
   }
@@ -70,5 +76,32 @@ a.market_info > img{
 }
 
 .store_logo {
-  height: 100px;
+  height: 100px;  
 }
+
+.logo_small_size {
+  height: 40px;
+}
+
+
+.compare_list {
+  display: flex;
+  position: relative;
+  width: 400px;
+  margin: auto;
+}
+.compare_list > div {
+  margin: 5px;
+}
+
+.compare_list > .right {
+  position: absolute; 
+  right:0px;
+}
+
+.compare_list > .center {
+  position: absolute; 
+  right: 160px;
+}
+
+
