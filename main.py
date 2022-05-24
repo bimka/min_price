@@ -110,7 +110,7 @@ async def compare_order(order, request: Request):
     order_list = order.split('&')
     # добавляем в markets_true_set магазины в которых весь набор 
     # продуктов имеется в наличии
-    markets_true_set = [] 
+    markets_true_set = []
     for market in list_markets: # проверяем все магазины
         confirmed_prod = [market] # сразу добавляем инфу о магазине
         total_price = 0 
@@ -120,10 +120,11 @@ async def compare_order(order, request: Request):
             # confirmed_prod совпадут, то добавляем магазин 
             # в markets_true_set
             try:
-                info =  p_other_stores.get(market.store_id, product)
+                info =  p_other_stores.get(market['store_id'], product)
                 if info['product']['offer']['price']:
                     confirmed_prod.append(info)
                     total_price += float(info['product']['offer']['price'])
+                    total_price = round(float(total_price), 2)
 
             except:
                 break
@@ -133,7 +134,6 @@ async def compare_order(order, request: Request):
             markets_true_set.append(confirmed_prod)
     # сортируем список по возрастанию общей цены
     markets_true_set = sorted(markets_true_set, key=itemgetter(-1))
-
         
     return templates.TemplateResponse(
                 "static/urls/compare.html",
