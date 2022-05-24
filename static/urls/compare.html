@@ -12,21 +12,48 @@
 
 </head>
 <body>
+  <header>
+    <a class="site_logo_href" href="http://localhost:8080">
+      <div id="site_logo">
+        minimal<br>
+        delivery<br>
+        price
+      </div>
+    </a>
+    <div id="'store_logo">
+      сравнение стоимости доставки продуктов
+    </div>
+  </header>
   <p>Ищем следующий набор продуктов в разных магазинах:</p>
-  <ul id="product_list"></ul>
+  <div class="product_list">
+    <ul id="product_list">
+    </ul>
+  </div>
 
   {% if markets_true_set %}    
-    <ul>
     {% for set in markets_true_set %}
-      <li>
-        {{ set[0].name }}: {{ set[-1]}} руб.
-      </li>
+      <div class="compare_list">
+        <div class="left">
+          <img class='logo_small_size' src='{{ set[0].retailer.appearance.logo_image }}' alt="market_logo">
+        </div>
+        <div class="center">
+          {{ set[-1]}} руб.
+        </div>
+        <div class="right">
+          <button type="button" class="btn btn-primary">Оформить заказ</button>
+        </div>
+        </div>
     {% endfor %}
-    </ul>
   {% endif %}
   
   
-  
+<footer>
+  <hr>
+  <p>Сервис находится в активной разработке.</p>
+  <p>Если вы нашли ошибку или у вас предложения по улучшению работы 
+    сервиса напишите на <a href="mailto:mintdragon@yandex.ruu">mintdragon@yandex.ru</a></p>
+</footer>
+
 <script src="http://localhost:8080/static/scripts/product_list.js" 
   type="text/javascript">
 </script>
@@ -39,7 +66,6 @@
   let ul  = document.getElementById('product_list');
     for (product in data) {    
     let li = document.createElement('li');
-    //li.setAttribute('id', `product_cart_id_${cart_list[product].id}`);
     li.innerHTML = `${data[product].name}`;
     ul.appendChild(li);
     }
