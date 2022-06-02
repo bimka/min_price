@@ -32,6 +32,7 @@
 
   {% if markets_true_set %}    
     {% for set in markets_true_set %}
+    {{ set[0] }}
       <div class="compare_list">
         <div class="left">
           <img class='logo_small_size' src='{{ set[0].retailer.appearance.logo_image }}' alt="market_logo">
@@ -40,7 +41,7 @@
           {{ set[-1]}} руб.
         </div>
         <div class="right">
-          <button type="button" class="btn btn-primary">Оформить заказ</button>
+          <a href="https://sbermarket.ru/{{ set[0].retailer.slug }}?sid={{ set[0].store_id }}" class="btn btn-primary" role="button" >Оформить заказ</a>
         </div>
         </div>
     {% endfor %}
