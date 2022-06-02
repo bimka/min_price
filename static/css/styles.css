@@ -9,26 +9,29 @@ p {
 
 header {
   display: flex;
-}
-
-header div {
-  font-size: 30px;
-  font-weight: bold;
-}
-
-#site_logo {
-  padding : 0 0 0 50px;  
   font-size: 30px;
   font-weight: bold;
   color: black;
+  height: 150px;
 }
 
-#title_block {
-  margin: auto;
+#site_logo {
+  text-align: left;
+  /*position: absolute;*/
+}
+
+.store_logo {
+  margin-left: 100px;
 }
 
 .site_logo_href {
   text-decoration: none;
+}
+
+
+
+.logo_small_size {
+  height: 40px;
 }
 
 .market_info {
@@ -75,13 +78,7 @@ a.market_info > img{
   height: 100px;
 }
 
-.store_logo {
-  height: 100px;  
-}
 
-.logo_small_size {
-  height: 40px;
-}
 
 
 .compare_list {
