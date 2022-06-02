@@ -168,6 +168,7 @@
     // общую цену
     let ul  = document.getElementById('shoping_cart_list');
     ul.innerHTML = '';
+    console.log(cart_list);
     for (product in cart_list) {    
     let li = document.createElement('li');
     li.setAttribute('id', `product_cart_id_${cart_list[product].id}`);
@@ -175,7 +176,7 @@
                     ${cart_list[product].name} - 
                     <span class='cart_price'> ${cart_list[product].price}</span> руб   
                     <button type='button' class='btn btn-outline-primary' 
-                      onclick='cart_list.splice(product); cart()'
+                      onclick='cart_list.splice(cart_list.findIndex(function(obj) { return obj.id == ${cart_list[product].id}}), 1); cart()'
                       >
                       X
                     </button>`;
