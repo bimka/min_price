@@ -41,13 +41,20 @@
           {{ set[-1]}} руб.
         </div>
         <div class="right">
-          <a href="https://sbermarket.ru/{{ set[0].retailer.slug }}?sid={{ set[0].store_id }}" class="btn btn-primary" role="button" >Оформить заказ</a>
+          <a href="https://sbermarket.ru/{{ set[0].retailer.slug }}?sid={{ set[0].store_id }}" 
+            class="btn btn-primary" role="button" 
+            data-market="{{ set[0].retailer.slug }}" 
+            data-id="{{ set[0].store_id }}"
+            onclick='doPost(this.dataset.market, this.dataset.id)'>Оформить заказ</a>
         </div>
         </div>
-    {% endfor %}
+    
+  <a href="javascript:doPost()">GO</a>
+  <form action="http://localhost:8080/push_product_list.py" id="theForm" name="postlink" method="post">
+    <input type="hidden" name="offer_id" value="12378746">
+  </form>
+  {% endfor %}
   {% endif %}
-  
-  
 <footer>
   <hr>
   <p>Сервис находится в активной разработке.</p>
@@ -55,19 +62,37 @@
     сервиса напишите на <a href="mailto:mintdragon@yandex.ruu">mintdragon@yandex.ru</a></p>
 </footer>
 
+<script type="text/javascript">
+  async function doPost(market, store_id) {
+    let data = ["25484988", 'metro', '21']; // legacy_offer_id: "25484988"
+    //let data = [cart.legacy_offer_id, 'metro', '21']; // legacy_offer_id: "25484988"
+    alert(cart[0].id);
+    const response = await fetch('http://localhost:8080/push_product_list', {
+      method: 'POST', 
+      cache: "no-cache",
+      mode: "no-cors", // to prevent CORS errors
+      redirect: "follow",
+      headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(data)
+  });
+  }
+</script>
+
 <script src="http://localhost:8080/static/scripts/product_list.js" 
   type="text/javascript">
 </script>
 <script>
   
   
-  let data = JSON.parse(sessionStorage.getItem("cart_list"));
-  console.log(data);
+  let cart = JSON.parse(sessionStorage.getItem("cart_list"));
+  console.log(cart);
 
   let ul  = document.getElementById('product_list');
-    for (product in data) {    
+    for (product in cart) {    
     let li = document.createElement('li');
-    li.innerHTML = `${data[product].name}`;
+    li.innerHTML = `${cart[product].name}`;
     ul.appendChild(li);
     }
   
