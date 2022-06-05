@@ -2,6 +2,7 @@ import os
 import json
 from urllib import response
 from operator import itemgetter
+import asyncio
 
 from fastapi import FastAPI, Request, Response
 from fastapi.templating import Jinja2Templates
@@ -17,6 +18,7 @@ import sbermarket_parser as sb_p
 import product_categories as p_cat
 import product_list as p_list
 import product_in_other_stores as p_other_stores
+import push_product_list as ppl
 
 load_dotenv()
 
@@ -30,6 +32,7 @@ origins = [
     "http://localhost:8080",
     "http://localhost:8000",
     "http://localhost:8080/send_product_list",
+    "http://localhost:8080/push_product_list",
 ]
 
 app.add_middleware(
@@ -120,7 +123,7 @@ async def compare_order(order, request: Request):
             # confirmed_prod совпадут, то добавляем магазин 
             # в markets_true_set
             try:
-                info =  p_other_stores.get(market['store_id'], product)
+                info =   p_other_stores.get(market['store_id'], product)
                 if info['product']['offer']['price']:
                     confirmed_prod.append(info)
                     total_price += float(info['product']['offer']['price'])
@@ -141,3 +144,13 @@ async def compare_order(order, request: Request):
                 "markets_true_set": markets_true_set,
                 } 
     )
+
+@app.post("/push_product_list")
+async def push_product_list(request: Request):
+    '''Функция отправляет список продуктов в Сбермаркет 
+       для их отображения в корзине
+    '''
+    offer_id , market, store_id = await request.json()
+    product_list = ppl.send(offer_id, market, store_id)
+    print(product_list)
+    return product_list
