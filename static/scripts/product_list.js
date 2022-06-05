@@ -17,7 +17,6 @@ async function send_url(url, store_id, category_id) {
 }
 
 
-//console.log(products);
 function rendering_markets_cards(products, category_id) {
     // функция создает картточки с продуктами
     let div  = document.getElementById('products-' + category_id);
@@ -45,6 +44,5 @@ function rendering_markets_cards(products, category_id) {
         div_card.setAttribute('id', product.legacy_product_id);
         div_card.setAttribute('class', 'col');
         div.appendChild(div_card);    
-    })
-    
+    })    
 }
