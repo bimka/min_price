@@ -63,10 +63,16 @@
 </footer>
 
 <script type="text/javascript">
+  
+
   async function doPost(market, store_id) {
-    let data = ["25484988", 'metro', '21']; // legacy_offer_id: "25484988"
-    //let data = [cart.legacy_offer_id, 'metro', '21']; // legacy_offer_id: "25484988"
-    alert(cart[0].id);
+    //let data = ["12680662", 'metro', '21']; // legacy_offer_id: "25484988"
+    //let data = [cart[0].legacy_offer_id, market, store_id]; // legacy_offer_id: "25484988"
+    // продукт надо искать через legacy_product_id, а на сервер отправлять legacy_offer_id,
+    // иначе в корзину сбермаркета будет добавляться только продукт из одного магазина, 
+    // того, через который добавляли продукты в свои корзину
+    let data = [list_legcy_offer_id, market, store_id]; // legacy_offer_id: "25484988"
+    alert(data);
     const response = await fetch('http://localhost:8080/push_product_list', {
       method: 'POST', 
       cache: "no-cache",
@@ -88,6 +94,11 @@
   
   let cart = JSON.parse(sessionStorage.getItem("cart_list"));
   console.log(cart);
+
+  let list_legcy_offer_id = [];
+  cart.forEach(element => {
+    list_legcy_offer_id.push(element.legacy_offer_id);
+  });
 
   let ul  = document.getElementById('product_list');
     for (product in cart) {    
