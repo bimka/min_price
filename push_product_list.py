@@ -1,11 +1,10 @@
 import requests
 import json
 
-def send(offer_id, market, store_id):
+def send(list_offer_id, market, store_id):
     '''Функция отправляет POST-запрос с id товара для отображения его 
        в корзине Сбермаркета
     ''' 
-    offer_id = offer_id
     cookies = {
         'user-id_1.0.5_lr_lruid': 'pQ8AALZpUGI75zMFATpqTQA%3D',
         '_ga': 'GA1.2.911227684.1646581779',
@@ -77,22 +76,29 @@ def send(offer_id, market, store_id):
         # 'TE': 'trailers',
     }
 
-    data = json.dumps({"line_item":{"offer_id" : offer_id}})
+    #list_offer_id = ["12680662", "12377819", "12389008"]
+    data = []
+    ola = []
+    #data = json.dumps({"line_item":{"offer_id" : offer_id}})
+    for offer in list_offer_id:
+        #data = json.dumps({"line_item":{"offer_id" : offer}})
+        data.append(json.dumps({"line_item":{"offer_id" : offer}}))
 
-    r = requests.post(
-                        'https://sbermarket.ru/api/line_items', 
-                        cookies=cookies, 
-                        headers=headers, 
-                        data=data,
-                        )
-    ola = r.text
+    for i in data:
+        r = requests.post(
+                            'https://sbermarket.ru/api/line_items', 
+                            cookies=cookies, 
+                            headers=headers, 
+                            data=i,
+                            )
+        ola.append(r.text)
     return print(ola)
 
 
 
 
 if __name__ == "__main__":
-    offer_id = "25484988"
+    offer_id = "12680662"
     market = 'metro'
     store_id = '21'
     products = send(offer_id, market, store_id)
