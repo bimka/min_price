@@ -39,7 +39,8 @@ if __name__ == "__main__":
         for product in order_list:
             try:
                 info = get(market, product)
-                if info['product']['offer']['price']:
+                if info['product']['offer']['price'] and \
+                    info['product']['offer']['active']:
                     
                     confirmed_prod.append(info)
             except:
