@@ -32,7 +32,7 @@
 
   {% if markets_true_set %}    
     {% for set in markets_true_set %}
-    {{ set[0] }}
+    {{ set }}
       <div class="compare_list">
         <div class="left">
           <img class='logo_small_size' src='{{ set[0].retailer.appearance.logo_image }}' alt="market_logo">
@@ -44,8 +44,11 @@
           <a href="https://sbermarket.ru/{{ set[0].retailer.slug }}?sid={{ set[0].store_id }}" 
             class="btn btn-primary" role="button" 
             data-market="{{ set[0].retailer.slug }}" 
-            data-id="{{ set[0].store_id }}"
-            onclick='doPost(this.dataset.market, this.dataset.id)'>Оформить заказ</a>
+            data-store_id="{{ set[0].store_id }}"
+            data-legacy_product_id="{{ set[1].product.offer.id }}"
+            onclick='doPost(this.dataset.legacy_product_id, 
+                            this.dataset.market, 
+                            this.dataset.store_id)'>Оформить заказ</a>
         </div>
         </div>
     
@@ -65,13 +68,14 @@
 <script type="text/javascript">
   
 
-  async function doPost(market, store_id) {
+  async function doPost(legacy_product_id, market, store_id) {
     //let data = ["12680662", 'metro', '21']; // legacy_offer_id: "25484988"
     //let data = [cart[0].legacy_offer_id, market, store_id]; // legacy_offer_id: "25484988"
     // продукт надо искать через legacy_product_id, а на сервер отправлять legacy_offer_id,
     // иначе в корзину сбермаркета будет добавляться только продукт из одного магазина, 
     // того, через который добавляли продукты в свои корзину
-    let data = [list_legcy_offer_id, market, store_id]; // legacy_offer_id: "25484988"
+    //legacy_product_id = ['12376159', '12376159'];
+    let data = [[legacy_product_id], market, store_id]; // legacy_offer_id: "25484988"
     alert(data);
     const response = await fetch('http://localhost:8080/push_product_list', {
       method: 'POST', 
@@ -95,9 +99,9 @@
   let cart = JSON.parse(sessionStorage.getItem("cart_list"));
   console.log(cart);
 
-  let list_legcy_offer_id = [];
+  let list_legacy_product_id = [];
   cart.forEach(element => {
-    list_legcy_offer_id.push(element.legacy_offer_id);
+    list_legacy_product_id.push(element.legacy_product_id);
   });
 
   let ul  = document.getElementById('product_list');
