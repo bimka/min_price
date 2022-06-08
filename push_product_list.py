@@ -1,7 +1,7 @@
 import requests
 import json
 
-def send(list_offer_id, market, store_id):
+def send(legacy_product_id, market, store_id):
     '''Функция отправляет POST-запрос с id товара для отображения его 
        в корзине Сбермаркета
     ''' 
@@ -80,9 +80,9 @@ def send(list_offer_id, market, store_id):
     data = []
     ola = []
     #data = json.dumps({"line_item":{"offer_id" : offer_id}})
-    for offer in list_offer_id:
+    for product in legacy_product_id:
         #data = json.dumps({"line_item":{"offer_id" : offer}})
-        data.append(json.dumps({"line_item":{"offer_id" : offer}}))
+        data.append(json.dumps({"line_item":{"offer_id" : product}}))
 
     for i in data:
         r = requests.post(
@@ -98,8 +98,8 @@ def send(list_offer_id, market, store_id):
 
 
 if __name__ == "__main__":
-    offer_id = "12680662"
+    legacy_product_id = "12680662"
     market = 'metro'
     store_id = '21'
-    products = send(offer_id, market, store_id)
+    products = send(legacy_product_id, market, store_id)
     print(products)

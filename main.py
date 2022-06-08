@@ -150,7 +150,7 @@ async def push_product_list(request: Request):
     '''Функция отправляет список продуктов в Сбермаркет 
        для их отображения в корзине
     '''
-    list_offer_id , market, store_id = await request.json()
-    product_list = ppl.send(list_offer_id, market, store_id)
+    legacy_product_id , market, store_id = await request.json()
+    product_list = ppl.send(legacy_product_id, market, store_id)
     print(product_list)
     return product_list
