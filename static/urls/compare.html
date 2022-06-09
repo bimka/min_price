@@ -46,16 +46,18 @@
             data-market="{{ set[0].retailer.slug }}" 
             data-store_id="{{ set[0].store_id }}"
             data-legacy_product_id="{{ set[1].product.offer.id }}"
-            onclick='doPost(this.dataset.legacy_product_id, 
+            onclick='doPost(list_offer_product_id(this.dataset.market), 
                             this.dataset.market, 
                             this.dataset.store_id)'>Оформить заказ</a>
         </div>
         </div>
-    
-  <a href="javascript:doPost()">GO</a>
-  <form action="http://localhost:8080/push_product_list.py" id="theForm" name="postlink" method="post">
-    <input type="hidden" name="offer_id" value="12378746">
-  </form>
+      <div class="'hidden" id="{{ set[0].retailer.slug  }}-offer-info">
+        {% for item in set[1:-1] %}
+          {{ item.product.offer.id }}
+        {% endfor %}
+      </div>
+  <a data-market="{{ set[0].retailer.slug }}"  
+   onclick="list_offer_product_id(this.dataset.market)">GO</a>
   {% endfor %}
   {% endif %}
 <footer>
@@ -68,19 +70,14 @@
 <script type="text/javascript">
   
 
-  async function doPost(legacy_product_id, market, store_id) {
-    //let data = ["12680662", 'metro', '21']; // legacy_offer_id: "25484988"
-    //let data = [cart[0].legacy_offer_id, market, store_id]; // legacy_offer_id: "25484988"
-    // продукт надо искать через legacy_product_id, а на сервер отправлять legacy_offer_id,
-    // иначе в корзину сбермаркета будет добавляться только продукт из одного магазина, 
-    // того, через который добавляли продукты в свои корзину
-    //legacy_product_id = ['12376159', '12376159'];
-    let data = [[legacy_product_id], market, store_id]; // legacy_offer_id: "25484988"
+  async function doPost(list_offer_product_id, market, store_id) {
+    // функция отправляет в Сбермаркет продуктовую корзину
+    let data = [list_offer_product_id, market, store_id]; 
     alert(data);
     const response = await fetch('http://localhost:8080/push_product_list', {
       method: 'POST', 
       cache: "no-cache",
-      mode: "no-cors", // to prevent CORS errors
+      mode: "no-cors", 
       redirect: "follow",
       headers: {
           'Content-Type': 'application/json;charset=utf-8'
@@ -99,12 +96,15 @@
   let cart = JSON.parse(sessionStorage.getItem("cart_list"));
   console.log(cart);
 
-  let list_legacy_product_id = [];
-  cart.forEach(element => {
-    list_legacy_product_id.push(element.legacy_product_id);
-  });
+  function list_offer_product_id(market) {
+    // Функция возвращает массив с offer_id для market
+    let data = document.getElementById(market+"-offer-info").innerText;
+    data = data.split(' ');
+    return data;
+  }
 
   let ul  = document.getElementById('product_list');
+  // отрисовываем список продуктов из корзины
     for (product in cart) {    
     let li = document.createElement('li');
     li.innerHTML = `${cart[product].name}`;
