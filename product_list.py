@@ -52,6 +52,6 @@ def make_path(*args):
 if __name__ == "__main__":
     url = 'https://sbermarket.ru/api/stores/10/products?tid=moloko-iaitsa-new/moloko&page=1&per_page=24&sort=popularity'
     store_id = str(1373)
-    url = 'https://sbermarket.ru/globus/c/katalogh-globus/sobstviennoie-proizvodstvo/piekarnia'
+    #url = 'https://sbermarket.ru/globus/c/katalogh-globus/sobstviennoie-proizvodstvo/piekarnia'
     products = get_products(url, store_id)
     print(products)
