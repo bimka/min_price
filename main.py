@@ -1,8 +1,5 @@
 import os
-import json
-from urllib import response
 from operator import itemgetter
-import asyncio
 
 from fastapi import FastAPI, Request, Response
 from fastapi.templating import Jinja2Templates

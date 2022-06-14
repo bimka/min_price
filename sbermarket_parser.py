@@ -2,7 +2,7 @@ import requests
 
 def get_markets(lat, lon):
     r = requests.get(
-        f'https://sbermarket.ru/api/stores?lat={ lat }&lon={ lon }&include=closest_shipping_options,labels,retailer&shipping_method=delivery'.format(lat = lat, lon = lon), 
+        f'https://sbermarket.ru/api/stores?lat={ lat }&lon={ lon }&include=closest_shipping_options,labels,retailer&shipping_method=delivery', 
         headers={
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:98.0) Gecko/20100101 Firefox/98.0', 
             'Accept': 'application/json, text/plain, */*', 
@@ -28,7 +28,7 @@ if __name__ == "__main__":
     lat = 55.75503467371233
     lon = 37.64715556103516
     sb_markets = get_markets(lat, lon)
-    print(sb_markets[0])
+    print(sb_markets)
     '''
     for market in sb_markets:
         print(market['retailer']['slug'])'''

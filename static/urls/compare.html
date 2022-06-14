@@ -48,7 +48,9 @@
             data-legacy_product_id="{{ set[1].product.offer.id }}"
             onclick='doPost(list_offer_product_id(this.dataset.market), 
                             this.dataset.market, 
-                            this.dataset.store_id)'>Оформить заказ</a>
+                            this.dataset.store_id)'>
+                              Оформить заказ
+          </a>
         </div>
         </div>
       <div class="'hidden" id="{{ set[0].retailer.slug  }}-offer-info">
@@ -100,6 +102,8 @@
     // Функция возвращает массив с offer_id для market
     let data = document.getElementById(market+"-offer-info").innerText;
     data = data.split(' ');
+    console.log('list_offer_product_id - сработа');
+    console.log(data);
     return data;
   }
 
