@@ -29,7 +29,7 @@
       <img src="{{ market.retailer.appearance.logo_image }}" alt="market_logo" class="store_logo" >
       <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" 
         data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"
-        onclick="cart()">
+        onclick="cart(); active_button_check()">
         Корзина
       </button>
     </div>
@@ -114,10 +114,20 @@
       </ul>
       <p id="total_price">
       </p>
-      <a class="btn btn-primary" href="#" onclick="go_to_comparison()" 
-        role="button">
-        Сравнить цену
-      </a>
+      <!--
+<span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" title="Отключенная подсказка">
+  <button class="btn btn-primary" type="button" disabled>Отключенная кнопка</button>
+</span>
+
+      -->
+      <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" 
+        title="Добавьте в корзину хотя бы один товар">
+        <a class="btn btn-primary" id="compare_button" 
+          href="#" onclick="go_to_comparison()" 
+          role="button">
+          Сравнить цену
+        </a>
+      </span>
     </div>
   </div>
   <footer>
@@ -176,7 +186,8 @@
                     ${cart_list[product].name} - 
                     <span class='cart_price'> ${cart_list[product].price}</span> руб   
                     <button type='button' class='btn btn-outline-primary' 
-                      onclick='cart_list.splice(cart_list.findIndex(function(obj) { return obj.id == ${cart_list[product].id}}), 1); cart()'
+                      onclick='cart_list.splice(cart_list.findIndex(function(obj) { return obj.id == ${cart_list[product].id}}), 1); 
+                      cart(); active_button_check()'
                       >
                       X
                     </button>`;
@@ -191,6 +202,20 @@
     // функция добавляет в массив объекты продуктов,
     // добавляемых в корзину
     cart_list.push(products.find(item => item.id == id));
+  }
+
+  function active_button_check(){
+    // функция делает неактивной/активной кнопку "Сравнить цену"
+    let btn = document.getElementById("compare_button");
+    let total_price = document.getElementById("price");
+    console.log(cart_list.length);
+    if (cart_list.length != 0) {
+      btn.classList.remove('disabled');
+      btn.setAttribute('aria-disabled', 'true');
+    } else {
+      btn.classList.add('disabled');
+      btn.setAttribute('aria-disabled', 'true');
+    }
   }
   
 </script>
