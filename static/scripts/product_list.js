@@ -36,7 +36,7 @@ function rendering_markets_cards(products, category_id) {
                 data-name="${product.name}" 
                 data-price="${product.price}" 
                 onclick='add_to_cart_list(this.dataset.id, this.dataset.name, 
-                  this.dataset.price)'>
+                  this.dataset.price); active_button_check()'>
                 Добавить в корзину
               </button>
             </div>
