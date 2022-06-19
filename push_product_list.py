@@ -5,90 +5,84 @@ def send(legacy_product_id, market, store_id):
     '''Функция отправляет POST-запрос с id товара для отображения его 
        в корзине Сбермаркета
     ''' 
+    
     cookies = {
-        'user-id_1.0.5_lr_lruid': 'pQ8AALZpUGI75zMFATpqTQA%3D',
+        'user-id_1.0.5_lr_lruid': 'pQ8AAEtvq2KUTEGEAScUbgA%3D',
         '_ga': 'GA1.2.911227684.1646581779',
-        'tmr_reqNum': '2998',
-        'external_analytics_anonymous_id': '0817e773-6e48-4f65-a0ad-f15d2dc24499',
-        '_ga_XVJWMHHXNJ': 'GS1.1.1654083880.63.1.1654083887.0',
-        '_ga_9QYWDVGJZ3': 'GS1.1.1654083881.63.1.1654083887.54',
-        'rl_anonymous_id': 'RudderEncrypt%3AU2FsdGVkX1%2BijQwsUuBVPnMrHbwUJR8Xd9Nxi8oizEF%2Baje7OJ9kEs2ec7BUmpVrDYHGuR73GUAEkKC5ERhtKg%3D%3D',
-        'rl_user_id': 'RudderEncrypt%3AU2FsdGVkX1%2BXiAk4QiYLKRUm8EG4ChyMmb5oURqmSOQG2miC1e6WtmA5IzrPxkY4CXstHtf9IR%2Fx3WP4gaf0vg%3D%3D',
-        'rl_group_id': 'RudderEncrypt%3AU2FsdGVkX19ke6ToqthP9G8VHUFxbfW%2F%2FtpVDVXyX8s%3D',
-        'rl_trait': 'RudderEncrypt%3AU2FsdGVkX18tK8xenw8evb9XXXxVeaEdFyyYs7jNCnaFvtFs8KXgD0Bww0G7dWDgbqf%2Fod89l0ROMqEx1%2BODeMTEckiMDCvGkS6Y2Zyx88YatL9AAlG1JoB6zeFsiEOUbwAdSYYbq53C9%2FaCQWnEpv5HV%2Bv7vYK8gj0Oj%2FZDxpcxNI5pKrrqeYAfif4XUmsdDoaoScz0GdueI24dbCgqPNzZfOjrFR%2F5MqGM3Ay0Zic0BOiFu%2FNytDCpQBlp7LhAlF0tVwzbVe7QQZEB3ePrfhne0aHN6WUOQd65MdG9MMqOiZq5b92LZxM36QgjvaPe1N7SBeP%2F3TCTqX8ZiWlqL6w1pzr84I6jjcbzhQ52OeQvfDBnstZrb%2FxBaNibyL7LAFWL3ZO2YD2s6%2B5vOacvz0DB5cx71t05kZjPsIjtj9nab9eovemMM8tbDCUSJ16OcmzxKyJpJef%2B991IJfazYH0xMRiVcCjVfCpEfFc4kRP%2FCkr8ZTMD%2F6cppBJ%2FVbbqk%2BgSKbXCcjcyZmqG%2B4Q%2BXBrW4rBbhzgy42xaLfTi2lnJtCZ67VI1lAWUespgGFvBspwR5l7AeKii85C1svbzvrm3uiEmXPs74%2BRmYZnPaK%2BxnR%2FK06KSdLYIWrrAt76xVxSQcP33yEY6gy%2BHSqROLjomFwH4j4%2B8By2UdlCpyKmBMoNJlU4N5uwzN8mZgGtkyHFVPhiOGag0cEHzifi3KuavuUVrb0wxHkNH4rhL4SsQ%2B3%2FJOEjDz3X1QdX4xzXBVtw59YgNMVZ6O4%2Fcx0VPHG41m527bU9yNcv98AxhB5apClu8wM%2FRmptgATY9qO7S2UY2hmbTGsdXTdTuwYDUBVF1UdtY%2BzQWUc32Aq8QzQ4%3D',
-        'rl_group_trait': 'RudderEncrypt%3AU2FsdGVkX1%2B0w7gB0ss2%2FLsu0tKeoNSrcBYBXxBtLn0%3D',
-        'rl_page_init_referrer': 'RudderEncrypt%3AU2FsdGVkX1873GasXShvY75ASIc2%2FXAAsXJYJVZVq7w%3D',
-        'rl_page_init_referring_domain': 'RudderEncrypt%3AU2FsdGVkX18yOFqvU3nMFPJL31BiiABVGbJgLz2Q3fg%3D',
-        '_gcl_au': '1.1.564503019.1650647742',
-        '_sa': 'SA1.75a07a87-dc5d-46af-8c9c-ec33a83f1349.1650647742',
-        'iap.uid': '7cfe3701f1144c158a57a1872455490f',
-        'adtech_uid': '5ce49b07-2561-4b40-88e9-dc6b3e5df420%3Asbermarket.ru',
-        'sessionIdPostfix': 'react-catalog',
-        'tmr_lvid': '3f5a5b054e48faf0aebcb729cfae9d41',
-        'tmr_lvidTS': '1650647746371',
-        '_ym_uid': '1650647747340769750',
-        '_ym_d': '1650647747',
-        '__exponea_etc__': '82b7ee4e-9dbd-4cdf-ba59-a8929283b0c0',
-        '_pk_id.6.3ec0': 'e1909fc2c9a6ab6f.1650904577.',
-        'rrpvid': '97',
-        'rcuid': '6292520e82847c0001a4fcda',
-        'resemble_b2b_tag': 'true',
-        'remember_user_token': 'BAhbCFsGaQP39%2B5JIhl5UmV6R05nTGUzUmpfNGphaW1LTgY6BkVGSSIXMTY1Mzc1NjYzMC4yNDEwNzMxBjsARg%3D%3D--11b06e255cf99ae28bedd4ce55d34541a61042f8',
-        '_808db7ba1248': '%5B%7B%22source%22%3A%22%28direct%29%22%2C%22medium%22%3A%22%28none%29%22%2C%22cookie_changed_at%22%3A1654080270%7D%2C%7B%22source%22%3A%22sbermarket.ru%22%2C%22medium%22%3A%22referral%22%2C%22cookie_changed_at%22%3A1654080278%7D%5D',
-        '_gid': 'GA1.2.87396216.1653927888',
-        'tmr_detect': '1%7C1654083890871',
-        'hide_pre_replacement_bubble': 'true',
+        'tmr_reqNum': '6379',
+        't3_sid_7588506': 's1.219645830.1655647999218.1655649786623.5.22.238.1',
+        '_ga_XVJWMHHXNJ': 'GS1.1.1655647999.8.1.1655649523.0',
+        '_ga_9QYWDVGJZ3': 'GS1.1.1655647999.8.1.1655649523.40',
+        'external_analytics_anonymous_id': '5acd5713-aa20-4ac0-afed-b1cf7a275c98',
+        '_808db7ba1248': '%5B%7B%22source%22%3A%22%28direct%29%22%2C%22medium%22%3A%22%28none%29%22%2C%22cookie_changed_at%22%3A1655649508%7D%2C%7B%22source%22%3A%22ru.stackoverflow.com%22%2C%22medium%22%3A%22referral%22%2C%22cookie_changed_at%22%3A1655402611%7D%2C%7B%22source%22%3A%22localhost%22%2C%22medium%22%3A%22referral%22%2C%22cookie_changed_at%22%3A1655649519%7D%2C%7B%22source%22%3A%22sbermarket.ru%22%2C%22medium%22%3A%22referral%22%2C%22cookie_changed_at%22%3A1655642308%7D%5D',
+        'rl_anonymous_id': 'RudderEncrypt%3AU2FsdGVkX1%2FHwfC9wZvLXpoivcGLfrv76kzYqTVBJHOdV5qtthgMRMfoDShMpd9ybSCTDq%2F1QtmDTW64QivmqQ%3D%3D',
+        'rl_user_id': 'RudderEncrypt%3AU2FsdGVkX1%2BP3THAblGWLaL10gDIGzeoZKfIxIcyQlc%3D',
+        'rl_group_id': 'RudderEncrypt%3AU2FsdGVkX19oJl7tw%2BGrJYtlBCXWdXoYIomZcbRmuv4%3D',
+        'rl_trait': 'RudderEncrypt%3AU2FsdGVkX1%2B75h7RqM7IUz%2BT5NRQRDySm3N%2FamOjiUY4wH%2FMmJMYQrsK9fxa6YitPhXFZdR%2FnunCq51rUQMQn2LehExTzi8ROqsv7EL504a7oxtsVCoi0NkZRWwRIeY9X48e9p5OEK2qn7dF3OQJxGNgzn%2Fi2W5CN7%2BBamjL83nDyrYH6susF7JWNgXXFxqJ',
+        'rl_group_trait': 'RudderEncrypt%3AU2FsdGVkX1%2B2FZ7iPLZrTSzH6B3f062VkyUPVPt3OfY%3D',
+        'rl_page_init_referrer': 'RudderEncrypt%3AU2FsdGVkX1%2BmI4V5Oeu1i56PAzc7RAb8yt70WSiv0NY%3D',
+        'rl_page_init_referring_domain': 'RudderEncrypt%3AU2FsdGVkX1%2BylEPuxT797%2B9H3qaXGwVQfjKO8Szmw%2Fk%3D',
+        '_gcl_au': '1.1.1360594403.1655402313',
+        '_sa': 'SA1.6ffb0faa-ad27-4469-bb2b-d40ff01e4a74.1655402313',
+        '_pk_id.6.3ec0': '4a1130da217a271b.1655402313.',
+        'iap.uid': '79d63f9b0b3542428876501a0301957b',
+        'rrpvid': '129',
+        'last_visit': '1655635123901%3A%3A1655649523901',
+        'adtech_uid': 'dda2487a-abe3-4737-a894-dd583ca812f1%3Asbermarket.ru',
+        'top100_id': 't1.7588506.1788315731.1655402315007',
+        'tmr_lvid': 'fa1f0e30c6e25808a4cafe704ebb6c25',
+        'tmr_lvidTS': '1655402316726',
+        '_ym_uid': '1655402317469774869',
+        '_ym_d': '1655402317',
+        'rcuid': '62ab6f4ab7ea52000131c1e3',
+        '__exponea_etc__': '15d49727-5ba4-42f3-ac28-c93e1948a892',
+        '_pk_ref.6.3ec0': '%5B%22%22%2C%22%22%2C1655648005%2C%22https%3A%2F%2Flocalhost%3A8080%2F%22%5D',
+        '_gid': 'GA1.2.152941237.1655565615',
+        'tmr_detect': '1%7C1655649524877',
+        'siteEntryTime': 'Sun%20Jun%2019%202022%2015%3A19%3A37%20GMT%2B0400%20(%D0%A1%D0%B0%D0%BC%D0%B0%D1%80%D1%81%D0%BA%D0%BE%D0%B5%20%D1%81%D1%82%D0%B0%D0%BD%D0%B4%D0%B0%D1%80%D1%82%D0%BD%D0%BE%D0%B5%20%D0%B2%D1%80%D0%B5%D0%BC%D1%8F)',
+        '__exponea_time2__': '-2.851045846939087',
         '_ym_isad': '1',
-        '_Instamart_session': 'WTl0a3pMcUV1OE5QY2FHOWFkdUFuSGZCQ2sraVdnSENLWEY0SWVGRVhKYnIyeHpjN1VzRnFqZmw3UngwQ3JjSzQveHJ5dERaR3NMVVU2SzFleVdOcTg4Smlja1VDcHZwNkQ2eHc2c0dlaWxvWllPR0U0VHlsRTZwQm11YlNzS29LcCs5L3FxeXdHOWRkVFVxV0VIL2Q5YzJCTVpzb25qRG53dEJGTGFaMVZ3cFRNSy9HMlFGbGhYVk81eHJsUTBIVStFY0Zib2xwMkhnYlVMaFJ5TG5uMzVNVktETzRLZzdoTkJpTm52d3pXbXduU1NBNGI4MUwxNEhOSUlzUkUxaEJHVTB5SHJNQTJQY1lkcDVhMFprbkgwL0UycTRWcS9ZQVgySFhrcFdLMms9LS1lcHVtOFlRNlJWMGxIeEFmdnhMUXRBPT0%3D--4214d590553490b298516c54e4d59cf493eba22b',
-        'city_info': '%7B%22slug%22%3A%22perm%22%2C%22name%22%3A%22%D0%9F%D0%B5%D1%80%D0%BC%D1%8C%22%2C%22lat%22%3A58.0041%2C%22lon%22%3A56.2397%7D',
-        '_pk_ses.6.3ec0': '1',
-        'pageviewCount': '2',
-        'sessionId': '16540838798648561069-react-catalog',
-        'top100_id': 't1.7588506.1490529896.1654083881398',
-        't2_sid_7588506': 's1.1318650359.1654083881400.1654083887965.1.3.3.1',
-        'siteEntryTime': 'Wed%20Jun%2001%202022%2015%3A44%3A42%20GMT%2B0400%20(%D0%A1%D0%B0%D0%BC%D0%B0%D1%80%D1%81%D0%BA%D0%BE%D0%B5%20%D1%81%D1%82%D0%B0%D0%BD%D0%B4%D0%B0%D1%80%D1%82%D0%BD%D0%BE%D0%B5%20%D0%B2%D1%80%D0%B5%D0%BC%D1%8F)',
-        'reachedTimer': '0',
-        '_gat_UA-136687175-2': '1',
+        '_Instamart_session': 'aXJEZ1hRYnJLV1lYbFFzUkpjRTg3ZmRVWWZQSVRtZkExNFBGWjh6bUF0NUlIQkU2WkROWGFWZEFQcVZuY2dBejR0dTlNSW91OHpucEVvbnZKRHByRGVXUHkwc1BJVFBjM295QzZUVjdQdEg5Smh2Ni80WWlKYWlYRDBIU3JXMGF2dVZkQUNPRUNCYWlBc29FVXlWTXJhbWxZZjU5QU9vS2hHaGVUK244OHJOdWFWVEVOT2JxMlJsdkRZV3VrZDAwcVkyaHhUSHE2clF3U082N1E3dVF6dz09LS0vRjJlUUttNWdHL1MyMFJmclVhK3RnPT0%3D--7077896784bb9b1d128ef468c157c6886f8eae80',
+        'city_info': '%7B%22slug%22%3A%22izhevsk%22%2C%22name%22%3A%22%D0%98%D0%B6%D0%B5%D0%B2%D1%81%D0%BA%22%2C%22lat%22%3A56.8489%2C%22lon%22%3A53.2316%7D',
+        'pageviewCount': '27',
         'identified_address': 'true',
-        'identified_user': 'true',
-        '_ym_visorc': 'w',
-        '_gat_%5Bobject%20Object%5D': '1',
-        '__exponea_time2__': '-3607.4388065338135',
-    }
-
-
+        '_pk_ses.6.3ec0': '1',
+        'sessionId': '16556480055695859695',
+        '_ym_visorc': 'b',
+        'reachedTimer': '1',
+        'user_is_adult': 'true',
+        'rrbasket': '',
+        '_gat_UA-136687175-2': '1',
+        }
 
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0',
-        'Host': 'sbermarket.ru',
-        'Accept': 'application/json, text/plain, */*',
-        'Accept-Language': 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'Referer': f'https://sbermarket.ru/{ market }?sid={ store_id }',
-        'Content-Type': 'application/json;charset=utf-8',
-        #'Content-Length': '35',
-        'X-CSRF-Token': 'm+KvXOKhqQQIm81eWN/fMPD6amsKIz5BJjA6CpiJY5jzgWWzg/w5n2fYaONKr5wegu9nAxnajhVpMU5GiuqpUA==',
-        'Origin': 'https://sbermarket.ru',
-        'DNT': '1',
-        'Connection': 'keep-alive',
-        # Requests sorts cookies= alphabetically
-        #'Cookie': 'user-id_1.0.5_lr_lruid=pQ8AALZpUGI75zMFATpqTQA%3D; _ga=GA1.2.911227684.1646581779; tmr_reqNum=2998; external_analytics_anonymous_id=0817e773-6e48-4f65-a0ad-f15d2dc24499; _ga_XVJWMHHXNJ=GS1.1.1654083880.63.1.1654083887.0; _ga_9QYWDVGJZ3=GS1.1.1654083881.63.1.1654083887.54; rl_anonymous_id=RudderEncrypt%3AU2FsdGVkX1%2BijQwsUuBVPnMrHbwUJR8Xd9Nxi8oizEF%2Baje7OJ9kEs2ec7BUmpVrDYHGuR73GUAEkKC5ERhtKg%3D%3D; rl_user_id=RudderEncrypt%3AU2FsdGVkX1%2BXiAk4QiYLKRUm8EG4ChyMmb5oURqmSOQG2miC1e6WtmA5IzrPxkY4CXstHtf9IR%2Fx3WP4gaf0vg%3D%3D; rl_group_id=RudderEncrypt%3AU2FsdGVkX19ke6ToqthP9G8VHUFxbfW%2F%2FtpVDVXyX8s%3D; rl_trait=RudderEncrypt%3AU2FsdGVkX18tK8xenw8evb9XXXxVeaEdFyyYs7jNCnaFvtFs8KXgD0Bww0G7dWDgbqf%2Fod89l0ROMqEx1%2BODeMTEckiMDCvGkS6Y2Zyx88YatL9AAlG1JoB6zeFsiEOUbwAdSYYbq53C9%2FaCQWnEpv5HV%2Bv7vYK8gj0Oj%2FZDxpcxNI5pKrrqeYAfif4XUmsdDoaoScz0GdueI24dbCgqPNzZfOjrFR%2F5MqGM3Ay0Zic0BOiFu%2FNytDCpQBlp7LhAlF0tVwzbVe7QQZEB3ePrfhne0aHN6WUOQd65MdG9MMqOiZq5b92LZxM36QgjvaPe1N7SBeP%2F3TCTqX8ZiWlqL6w1pzr84I6jjcbzhQ52OeQvfDBnstZrb%2FxBaNibyL7LAFWL3ZO2YD2s6%2B5vOacvz0DB5cx71t05kZjPsIjtj9nab9eovemMM8tbDCUSJ16OcmzxKyJpJef%2B991IJfazYH0xMRiVcCjVfCpEfFc4kRP%2FCkr8ZTMD%2F6cppBJ%2FVbbqk%2BgSKbXCcjcyZmqG%2B4Q%2BXBrW4rBbhzgy42xaLfTi2lnJtCZ67VI1lAWUespgGFvBspwR5l7AeKii85C1svbzvrm3uiEmXPs74%2BRmYZnPaK%2BxnR%2FK06KSdLYIWrrAt76xVxSQcP33yEY6gy%2BHSqROLjomFwH4j4%2B8By2UdlCpyKmBMoNJlU4N5uwzN8mZgGtkyHFVPhiOGag0cEHzifi3KuavuUVrb0wxHkNH4rhL4SsQ%2B3%2FJOEjDz3X1QdX4xzXBVtw59YgNMVZ6O4%2Fcx0VPHG41m527bU9yNcv98AxhB5apClu8wM%2FRmptgATY9qO7S2UY2hmbTGsdXTdTuwYDUBVF1UdtY%2BzQWUc32Aq8QzQ4%3D; rl_group_trait=RudderEncrypt%3AU2FsdGVkX1%2B0w7gB0ss2%2FLsu0tKeoNSrcBYBXxBtLn0%3D; rl_page_init_referrer=RudderEncrypt%3AU2FsdGVkX1873GasXShvY75ASIc2%2FXAAsXJYJVZVq7w%3D; rl_page_init_referring_domain=RudderEncrypt%3AU2FsdGVkX18yOFqvU3nMFPJL31BiiABVGbJgLz2Q3fg%3D; _gcl_au=1.1.564503019.1650647742; _sa=SA1.75a07a87-dc5d-46af-8c9c-ec33a83f1349.1650647742; iap.uid=7cfe3701f1144c158a57a1872455490f; adtech_uid=5ce49b07-2561-4b40-88e9-dc6b3e5df420%3Asbermarket.ru; sessionIdPostfix=react-catalog; tmr_lvid=3f5a5b054e48faf0aebcb729cfae9d41; tmr_lvidTS=1650647746371; _ym_uid=1650647747340769750; _ym_d=1650647747; __exponea_etc__=82b7ee4e-9dbd-4cdf-ba59-a8929283b0c0; _pk_id.6.3ec0=e1909fc2c9a6ab6f.1650904577.; rrpvid=97; rcuid=6292520e82847c0001a4fcda; resemble_b2b_tag=true; remember_user_token=BAhbCFsGaQP39%2B5JIhl5UmV6R05nTGUzUmpfNGphaW1LTgY6BkVGSSIXMTY1Mzc1NjYzMC4yNDEwNzMxBjsARg%3D%3D--11b06e255cf99ae28bedd4ce55d34541a61042f8; _808db7ba1248=%5B%7B%22source%22%3A%22%28direct%29%22%2C%22medium%22%3A%22%28none%29%22%2C%22cookie_changed_at%22%3A1654080270%7D%2C%7B%22source%22%3A%22sbermarket.ru%22%2C%22medium%22%3A%22referral%22%2C%22cookie_changed_at%22%3A1654080278%7D%5D; _gid=GA1.2.87396216.1653927888; tmr_detect=1%7C1654083890871; hide_pre_replacement_bubble=true; _ym_isad=1; _Instamart_session=WTl0a3pMcUV1OE5QY2FHOWFkdUFuSGZCQ2sraVdnSENLWEY0SWVGRVhKYnIyeHpjN1VzRnFqZmw3UngwQ3JjSzQveHJ5dERaR3NMVVU2SzFleVdOcTg4Smlja1VDcHZwNkQ2eHc2c0dlaWxvWllPR0U0VHlsRTZwQm11YlNzS29LcCs5L3FxeXdHOWRkVFVxV0VIL2Q5YzJCTVpzb25qRG53dEJGTGFaMVZ3cFRNSy9HMlFGbGhYVk81eHJsUTBIVStFY0Zib2xwMkhnYlVMaFJ5TG5uMzVNVktETzRLZzdoTkJpTm52d3pXbXduU1NBNGI4MUwxNEhOSUlzUkUxaEJHVTB5SHJNQTJQY1lkcDVhMFprbkgwL0UycTRWcS9ZQVgySFhrcFdLMms9LS1lcHVtOFlRNlJWMGxIeEFmdnhMUXRBPT0%3D--4214d590553490b298516c54e4d59cf493eba22b; city_info=%7B%22slug%22%3A%22perm%22%2C%22name%22%3A%22%D0%9F%D0%B5%D1%80%D0%BC%D1%8C%22%2C%22lat%22%3A58.0041%2C%22lon%22%3A56.2397%7D; _pk_ses.6.3ec0=1; pageviewCount=2; sessionId=16540838798648561069-react-catalog; top100_id=t1.7588506.1490529896.1654083881398; t2_sid_7588506=s1.1318650359.1654083881400.1654083887965.1.3.3.1; siteEntryTime=Wed%20Jun%2001%202022%2015%3A44%3A42%20GMT%2B0400%20(%D0%A1%D0%B0%D0%BC%D0%B0%D1%80%D1%81%D0%BA%D0%BE%D0%B5%20%D1%81%D1%82%D0%B0%D0%BD%D0%B4%D0%B0%D1%80%D1%82%D0%BD%D0%BE%D0%B5%20%D0%B2%D1%80%D0%B5%D0%BC%D1%8F); reachedTimer=0; _gat_UA-136687175-2=1; identified_address=true; identified_user=true; _ym_visorc=w; _gat_%5Bobject%20Object%5D=1; __exponea_time2__=-3607.4388065338135',
-        'Sec-Fetch-Dest': 'empty',
-        'Sec-Fetch-Mode': 'cors',
-        'Sec-Fetch-Site': 'same-origin',
-        # Requests doesn't support trailers
-        'TE': 'trailers',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0',
+    'Accept': 'application/json, text/plain, */*',
+    'Accept-Language': 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    # 'Accept-Encoding': 'gzip, deflate, br',
+    'Referer': f'https://sbermarket.ru/{ market }?sid={ store_id }',
+    'Content-Type': 'application/json;charset=utf-8',
+    'X-CSRF-Token': 'M+CwdDInEKskEymG7yLQXhfcGXrXreXcHBavGPEsrrTCMS0rWS4zdBAM+EJq8LViYuGi5/KIr74pwL7uFybBgw==',
+    'Origin': 'https://sbermarket.ru',
+    'DNT': '1',
+    'Connection': 'keep-alive',
+    # Requests sorts cookies= alphabetically
+    # 'Cookie': 'user-id_1.0.5_lr_lruid=pQ8AAEtvq2KUTEGEAScUbgA%3D; _ga=GA1.2.911227684.1646581779; tmr_reqNum=6379; t3_sid_7588506=s1.219645830.1655647999218.1655649786623.5.22.238.1; _ga_XVJWMHHXNJ=GS1.1.1655647999.8.1.1655649523.0; _ga_9QYWDVGJZ3=GS1.1.1655647999.8.1.1655649523.40; external_analytics_anonymous_id=5acd5713-aa20-4ac0-afed-b1cf7a275c98; _808db7ba1248=%5B%7B%22source%22%3A%22%28direct%29%22%2C%22medium%22%3A%22%28none%29%22%2C%22cookie_changed_at%22%3A1655649508%7D%2C%7B%22source%22%3A%22ru.stackoverflow.com%22%2C%22medium%22%3A%22referral%22%2C%22cookie_changed_at%22%3A1655402611%7D%2C%7B%22source%22%3A%22localhost%22%2C%22medium%22%3A%22referral%22%2C%22cookie_changed_at%22%3A1655649519%7D%2C%7B%22source%22%3A%22sbermarket.ru%22%2C%22medium%22%3A%22referral%22%2C%22cookie_changed_at%22%3A1655642308%7D%5D; rl_anonymous_id=RudderEncrypt%3AU2FsdGVkX1%2FHwfC9wZvLXpoivcGLfrv76kzYqTVBJHOdV5qtthgMRMfoDShMpd9ybSCTDq%2F1QtmDTW64QivmqQ%3D%3D; rl_user_id=RudderEncrypt%3AU2FsdGVkX1%2BP3THAblGWLaL10gDIGzeoZKfIxIcyQlc%3D; rl_group_id=RudderEncrypt%3AU2FsdGVkX19oJl7tw%2BGrJYtlBCXWdXoYIomZcbRmuv4%3D; rl_trait=RudderEncrypt%3AU2FsdGVkX1%2B75h7RqM7IUz%2BT5NRQRDySm3N%2FamOjiUY4wH%2FMmJMYQrsK9fxa6YitPhXFZdR%2FnunCq51rUQMQn2LehExTzi8ROqsv7EL504a7oxtsVCoi0NkZRWwRIeY9X48e9p5OEK2qn7dF3OQJxGNgzn%2Fi2W5CN7%2BBamjL83nDyrYH6susF7JWNgXXFxqJ; rl_group_trait=RudderEncrypt%3AU2FsdGVkX1%2B2FZ7iPLZrTSzH6B3f062VkyUPVPt3OfY%3D; rl_page_init_referrer=RudderEncrypt%3AU2FsdGVkX1%2BmI4V5Oeu1i56PAzc7RAb8yt70WSiv0NY%3D; rl_page_init_referring_domain=RudderEncrypt%3AU2FsdGVkX1%2BylEPuxT797%2B9H3qaXGwVQfjKO8Szmw%2Fk%3D; _gcl_au=1.1.1360594403.1655402313; _sa=SA1.6ffb0faa-ad27-4469-bb2b-d40ff01e4a74.1655402313; _pk_id.6.3ec0=4a1130da217a271b.1655402313.; iap.uid=79d63f9b0b3542428876501a0301957b; rrpvid=129; last_visit=1655635123901%3A%3A1655649523901; adtech_uid=dda2487a-abe3-4737-a894-dd583ca812f1%3Asbermarket.ru; top100_id=t1.7588506.1788315731.1655402315007; tmr_lvid=fa1f0e30c6e25808a4cafe704ebb6c25; tmr_lvidTS=1655402316726; _ym_uid=1655402317469774869; _ym_d=1655402317; rcuid=62ab6f4ab7ea52000131c1e3; __exponea_etc__=15d49727-5ba4-42f3-ac28-c93e1948a892; _pk_ref.6.3ec0=%5B%22%22%2C%22%22%2C1655648005%2C%22https%3A%2F%2Flocalhost%3A8080%2F%22%5D; _gid=GA1.2.152941237.1655565615; tmr_detect=1%7C1655649524877; siteEntryTime=Sun%20Jun%2019%202022%2015%3A19%3A37%20GMT%2B0400%20(%D0%A1%D0%B0%D0%BC%D0%B0%D1%80%D1%81%D0%BA%D0%BE%D0%B5%20%D1%81%D1%82%D0%B0%D0%BD%D0%B4%D0%B0%D1%80%D1%82%D0%BD%D0%BE%D0%B5%20%D0%B2%D1%80%D0%B5%D0%BC%D1%8F); __exponea_time2__=-2.851045846939087; _ym_isad=1; _Instamart_session=aXJEZ1hRYnJLV1lYbFFzUkpjRTg3ZmRVWWZQSVRtZkExNFBGWjh6bUF0NUlIQkU2WkROWGFWZEFQcVZuY2dBejR0dTlNSW91OHpucEVvbnZKRHByRGVXUHkwc1BJVFBjM295QzZUVjdQdEg5Smh2Ni80WWlKYWlYRDBIU3JXMGF2dVZkQUNPRUNCYWlBc29FVXlWTXJhbWxZZjU5QU9vS2hHaGVUK244OHJOdWFWVEVOT2JxMlJsdkRZV3VrZDAwcVkyaHhUSHE2clF3U082N1E3dVF6dz09LS0vRjJlUUttNWdHL1MyMFJmclVhK3RnPT0%3D--7077896784bb9b1d128ef468c157c6886f8eae80; city_info=%7B%22slug%22%3A%22izhevsk%22%2C%22name%22%3A%22%D0%98%D0%B6%D0%B5%D0%B2%D1%81%D0%BA%22%2C%22lat%22%3A56.8489%2C%22lon%22%3A53.2316%7D; pageviewCount=27; identified_address=true; _pk_ses.6.3ec0=1; sessionId=16556480055695859695; _ym_visorc=b; reachedTimer=1; user_is_adult=true; rrbasket=; _gat_UA-136687175-2=1',
+    'Sec-Fetch-Dest': 'empty',
+    'Sec-Fetch-Mode': 'cors',
+    'Sec-Fetch-Site': 'same-origin',
+    # Requests doesn't support trailers
+    # 'TE': 'trailers',
     }
-
-    #list_offer_id = ["12680662", "12377819", "12389008"]
+    
     line_items = []
     ola = []
-    #data = json.dumps({"line_item":{"offer_id" : offer_id}})
+    
     for product in legacy_product_id:
-        #data = json.dumps({"line_item":{"offer_id" : offer}})
+        
         line_items.append(json.dumps({"line_item":{"offer_id" : product}}))
-    print(line_items)
     for i in line_items:
+        print(i)
         r = requests.post(
                             'https://sbermarket.ru/api/line_items', 
                             cookies=cookies, 
@@ -96,8 +90,7 @@ def send(legacy_product_id, market, store_id):
                             data=i,
                             )
         ola.append(r.text)
-    return print(ola)
-
+    print(ola)
 
 
 
