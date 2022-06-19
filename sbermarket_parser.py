@@ -1,6 +1,9 @@
 import requests
 
 def get_markets(lat, lon):
+    ''' Функция отправляет на сервер Сбермаркета координаты доставки,
+        возвращается список магазинов, совершающих доставку на данный адрес
+    '''
     r = requests.get(
         f'https://sbermarket.ru/api/stores?lat={ lat }&lon={ lon }&include=closest_shipping_options,labels,retailer&shipping_method=delivery', 
         headers={
@@ -29,6 +32,3 @@ if __name__ == "__main__":
     lon = 37.64715556103516
     sb_markets = get_markets(lat, lon)
     print(sb_markets)
-    '''
-    for market in sb_markets:
-        print(market['retailer']['slug'])'''
