@@ -5,7 +5,7 @@ async function send_url(url, store_id, category_id) {
     // функция отправляет на сервер store_id и canonical_url 
     // подкатегории с продуктами
     data = [url, store_id];
-    const response = await fetch('http://127.0.0.1:8080/send_product_list', {
+    const response = await fetch('https://localhost:8080/send_product_list', {
       method: 'POST', 
       headers: {
           'Content-Type': 'application/json;charset=utf-8'

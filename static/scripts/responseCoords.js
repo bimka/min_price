@@ -1,7 +1,9 @@
 async function responseCoords(coords) {
     // функция responseCoords отправляет на сервер координаты доставки
-    let response = await fetch('http://127.0.0.1:8080/', {
+    console.log('func responseCoord has been worked');
+    let response = await fetch('https://localhost:8080', {
         method: 'POST', 
+        mode: 'no-cors',
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
         },

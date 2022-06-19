@@ -16,6 +16,7 @@ import product_categories as p_cat
 import product_list as p_list
 import product_in_other_stores as p_other_stores
 import push_product_list as ppl
+import ola  
 
 load_dotenv()
 
@@ -25,18 +26,19 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="")
 
 origins = [
-    "http://localhost",
-    "http://localhost:8080",
-    "http://localhost:8000",
-    "http://localhost:8080/send_product_list",
-    "http://localhost:8080/push_product_list",
+    "https://localhost",
+    "https://localhost:8080",
+    "https://localhost:8000",
+    "https://localhost:8080/send_product_list",
+    "https://localhost:8080/push_product_list",
+    "https://sbermarket.ru/metro?sid=21",
 ]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["POST", "GET"],
+    allow_methods=["*"],
     allow_headers=["*"],
     max_age=3600,
 )
@@ -71,6 +73,7 @@ async def add_address(request: Request):
     '''
     
     coords = await request.json()
+    print(coords)
     markets = sb_p.get_markets(lat = coords[0], lon = coords[1])
     global list_markets  # очищаем список перед каждым вызовом
     list_markets = markets
@@ -146,8 +149,9 @@ async def compare_order(order, request: Request):
 async def push_product_list(request: Request):
     '''Функция отправляет список продуктов в Сбермаркет 
        для их отображения в корзине
+       Перед этим отправляем координты для получения адреса
+
     '''
     legacy_product_id , market, store_id = await request.json()
-    product_list = ppl.send(legacy_product_id, market, store_id)
-    print(product_list)
-    return product_list
+    ppl.send(legacy_product_id, market, store_id)
+
