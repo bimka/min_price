@@ -1,7 +1,7 @@
 import requests
 import fake_useragent
 
-def get_cookies():
+def establish_connection():
     ''' Функция отправляет на сервер Сбермаркета запрос для 
          coздания сессии  и получения куки
     '''
@@ -10,7 +10,7 @@ def get_cookies():
     session = requests.Session()
 
     user = fake_useragent.UserAgent().random
-
+    
     headers = {
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
         'Accept-Language': 'ru,en;q=0.9,en-GB;q=0.8,en-US;q=0.7',
@@ -25,6 +25,8 @@ def get_cookies():
         )
         
     add_csrf_token_to_cookies(session)
+    
+    return session
 
 def add_csrf_token_to_cookies(session):
     '''Функция отправляет запрос на сервер Сбермаркета для получения 
@@ -32,7 +34,7 @@ def add_csrf_token_to_cookies(session):
     '''
     url = 'https://sbermarket.ru/api/next/page_part/browser_head'
 
-    headers = {
+    additional_header_fields = {
         'Accept': 'application/json, text/plain, */*',
         'Accept-Language': 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
         'Accept-Encoding': 'gzip, deflate, br',
@@ -45,7 +47,7 @@ def add_csrf_token_to_cookies(session):
         'TE': 'trailers',
     }
 
-    session.headers.update(headers)
+    session.headers.update(additional_header_fields)
 
     responce = session.get(
         url, 
@@ -55,6 +57,6 @@ def add_csrf_token_to_cookies(session):
     session.headers.update(csrf_token)
 
 if __name__ == "__main__":
-    session = get_cookies()
+    session = establish_connection()
     print(session)
     
