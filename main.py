@@ -11,12 +11,13 @@ from typing import List
 from dotenv import load_dotenv
 from requests import request
 
+import session 
 import sbermarket_parser as sb_p
 import product_categories as p_cat
 import product_list as p_list
 import product_in_other_stores as p_other_stores
 import push_product_list as ppl
-import ola  
+
 
 load_dotenv()
 
@@ -29,9 +30,8 @@ origins = [
     "https://localhost",
     "https://localhost:8080",
     "https://localhost:8000",
-    "https://localhost:8080/send_product_list",
-    "https://localhost:8080/push_product_list",
-    "https://sbermarket.ru/metro?sid=21",
+    #"https://localhost:8080/send_product_list",
+    #"https://localhost:8080/push_product_list",
 ]
 
 app.add_middleware(
@@ -55,6 +55,7 @@ class Product(BaseModel):
     pass
 
 list_markets = []
+COORDS = ''
 
 @app.get("/")
 async def get(request: Request):
@@ -72,9 +73,11 @@ async def add_address(request: Request):
         указанному адресу
     '''
     
-    coords = await request.json()
-    print(coords)
-    markets = sb_p.get_markets(lat = coords[0], lon = coords[1])
+    global COORDS
+    COORDS = await request.json()
+    global CONNECTION
+    CONNECTION = session.establish_connection()
+    markets = sb_p.get_markets(CONNECTION, COORDS)
     global list_markets  # очищаем список перед каждым вызовом
     list_markets = markets
     return list_markets
@@ -153,5 +156,8 @@ async def push_product_list(request: Request):
 
     '''
     legacy_product_id , market, store_id = await request.json()
+    print(COORDS)
+    sb_p.get_markets(lat = COORDS[0], lon = COORDS[1])
+    #user_coord.send(lat = COORDS[0], lon = COORDS[1])
     ppl.send(legacy_product_id, market, store_id)
 
