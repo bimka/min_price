@@ -91,7 +91,7 @@ async def get_store_products(request: Request, market_id):
     # Найдем конкретный магазин из всех объектов
     for market in list_markets:
         if market['store_id'] == int(market_id):  
-            categories = p_cat.get_categories(market_id)          
+            categories = p_cat.get_categories(CONNECTION, market_id)          
             return templates.TemplateResponse(
                 "static/urls/store.html",
                 {"request": request, 
@@ -106,7 +106,7 @@ async def send_product_list(request: Request):
        категории товаров
     '''
     url , store_id = await request.json()
-    product_list = p_list.get_products(url, store_id)
+    product_list = p_list.get_products(CONNECTION, url, store_id)
     return product_list
 
 @app.get("/compare/order={order}")
@@ -126,7 +126,8 @@ async def compare_order(order, request: Request):
             # confirmed_prod совпадут, то добавляем магазин 
             # в markets_true_set
             try:
-                info =   p_other_stores.get(market['store_id'], product)
+                info =   p_other_stores.get(CONNECTION, market['retailer']['slug'], market['store_id'], product)
+                print('info: ', info)
                 if info['product']['offer']['price']:
                     confirmed_prod.append(info)
                     total_price += float(info['product']['offer']['price'])
