@@ -1,4 +1,4 @@
-import requests
+#import requests
 
 def get_markets(CONNECTION, COORDS):
     ''' Функция отправляет на сервер Сбермаркета координаты доставки,
@@ -15,7 +15,7 @@ def get_markets(CONNECTION, COORDS):
     }
     CONNECTION.headers.update(additional_header_fields)
 
-    response = requests.get(
+    response = CONNECTION.get(
         f'https://sbermarket.ru/api/stores?lat={ lat }&lon={ lon }&include=closest_shipping_options,labels,retailer&shipping_method=delivery', 
         headers = CONNECTION.headers,
         )
@@ -27,3 +27,5 @@ if __name__ == "__main__":
     lon = 37.64715556103516
     sb_markets = get_markets(lat, lon)
     print(sb_markets)
+
+
