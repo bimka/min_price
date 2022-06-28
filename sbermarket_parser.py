@@ -17,7 +17,7 @@ def get_markets(CONNECTION, COORDS):
 
     response = CONNECTION.get(
         f'https://sbermarket.ru/api/stores?lat={ lat }&lon={ lon }&include=closest_shipping_options,labels,retailer&shipping_method=delivery', 
-        headers = CONNECTION.headers,
+        #headers = CONNECTION.headers,
         )
 
     return response.json()
