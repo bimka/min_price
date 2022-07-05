@@ -148,17 +148,18 @@ async def compare_order(order, request: Request):
                 "markets_true_set": markets_true_set,
                 } 
     )
-
+    
+"""
 @app.post("/push_product_list")
 async def push_product_list(request: Request):
     '''Функция отправляет список продуктов в Сбермаркет 
        для их отображения в корзине
        Перед этим отправляем координты для получения адреса
 
+       ФУНКЦИЯ НА ДАННЫЙ МОМЕНТ НЕ РЕАЛИЗУЕМА!!!
+       ЗАДЕЛ НА БУДЕЩЕЕ
+       КУКИ БЕРУТСЯ ИЗ НЕОТКУДА, ПОКА НЕТ ВОЗМОЖНОСТИ ПЕРЕХВАТИТЬ
     '''
     legacy_product_id , market, store_id = await request.json()
-    print(COORDS)
-    sb_p.get_markets(lat = COORDS[0], lon = COORDS[1])
-    #user_coord.send(lat = COORDS[0], lon = COORDS[1])
-    ppl.send(legacy_product_id, market, store_id)
-
+    ppl.send(CONNECTION, legacy_product_id, market, store_id)
+"""

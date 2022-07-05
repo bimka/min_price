@@ -8,7 +8,6 @@ p {
 }
 
 header {
-  display: flex;
   font-size: 30px;
   font-weight: bold;
   color: black;
@@ -17,11 +16,11 @@ header {
 
 #site_logo {
   text-align: left;
-  /*position: absolute;*/
 }
 
 .store_logo {
   margin-left: 100px;
+  max-height: 100px;
 }
 
 .site_logo_href {
