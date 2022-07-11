@@ -16,5 +16,5 @@ jobs:
       - run: echo "${{ secrets.key }}" > "$HOME/.ssh/key"
       - run: chmod 600 "$HOME/.ssh/key"
       # Deploy
-      - run: rsync -e "ssh -p 80 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . u1727349@server235.hosting.reg.ru:/var/www/u1727349/data/www/mindeliveryprice.ru     
+      - run: rsync -e "ssh -p  80 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . u1727349@server235.hosting.reg.ru:/var/www/u1727349/data/www/mindeliveryprice.ru     
       
