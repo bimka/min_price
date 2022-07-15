@@ -27,11 +27,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="")
 
 origins = [
-    "https://localhost",
-    "https://localhost:8080",
-    "https://localhost:8000",
-    #"https://localhost:8080/send_product_list",
-    #"https://localhost:8080/push_product_list",
+    "https://mindeliveryprice.ru/",
 ]
 
 app.add_middleware(
