@@ -162,5 +162,5 @@ async def push_product_list(request: Request):
     ppl.send(CONNECTION, legacy_product_id, market, store_id)
 """
 
-if __name__ == '__main__':
-    uvicorn.run('main:app', port=8080 , host='31.31.198.22')
+if __name__ == "__main__":
+       app.run(host='0.0.0.0')

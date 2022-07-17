@@ -1,6 +1,11 @@
-from main import app 
-import os, sys
+import sys
 
-sys.path.insert(0, '/var/www/u1727349/data/www/mindeliveryprice.ru')
-sys.path.insert(1, '/var/www/u1727349/data/min_delivery_price_env/lib/python3.10/site-packages')
-application = app
+import os
+
+INTERP = os.path.expanduser("/var/www/u1727349/data/min_delivery_price_env/bin/python")
+if sys.executable != INTERP:
+   os.execl(INTERP, INTERP, *sys.argv)
+
+sys.path.append(os.getcwd())
+
+from main import app
