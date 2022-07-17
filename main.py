@@ -163,4 +163,4 @@ async def push_product_list(request: Request):
 """
 
 if __name__ == '__main__':
-    uvicorn.run('main:app', port=8080, host='31.31.198.22')
+    uvicorn.run('main:app', port=8080 , host='31.31.198.22')
