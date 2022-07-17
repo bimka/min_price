@@ -29,6 +29,7 @@ templates = Jinja2Templates(directory="")
 
 origins = [
     "https://mindeliveryprice.ru/",
+    "mindeliveryprice.ru", 
 ]
 
 app.add_middleware(
