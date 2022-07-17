@@ -1,5 +1,6 @@
 import os
 from operator import itemgetter
+import uvicorn
 
 from fastapi import FastAPI, Request, Response
 from fastapi.templating import Jinja2Templates
@@ -159,3 +160,6 @@ async def push_product_list(request: Request):
     legacy_product_id , market, store_id = await request.json()
     ppl.send(CONNECTION, legacy_product_id, market, store_id)
 """
+
+if __name__ == '__main__':
+    uvicorn.run('main:app', port=80, host='31.31.198.22')
