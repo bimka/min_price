@@ -13,8 +13,8 @@ jobs:
       # Setup key
       - run: set -eu
       - run: mkdir "$HOME/.ssh"
-      - run: echo "${{ secrets.key }}" > "$HOME/.ssh/key"
-      - run: chmod 600 "$HOME/.ssh/key"
+      - run: echo "${{ secrets.key }}" > "$HOME/.ssh/ authorized_keys"
+      - run: chmod 600 "$HOME/.ssh/ authorized_keys"
       # Deploy
-      - run: rsync --archive --compress --delete -e "ssh -p 22  -i $HOME/.ssh/key -o StrictHostKeyChecking=no" . root@194.67.119.198:/root 
+      - run: rsync --archive --compress --delete -e "ssh -p 22  -i $HOME/.ssh/authorized_keys -o StrictHostKeyChecking=no" . root@194.67.119.198:/root 
       
