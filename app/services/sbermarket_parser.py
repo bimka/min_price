@@ -14,13 +14,10 @@ def get_markets(CONNECTION, COORDS):
         'is-storefront-ssr': 'false', 
     }
     CONNECTION.headers.update(additional_header_fields)
-    print(CONNECTION.cookies)
 
     response = CONNECTION.get(
         f'https://sbermarket.ru/api/stores?lat={ lat }&lon={ lon }&include=closest_shipping_options,labels,retailer&shipping_method=delivery', 
-        #headers = CONNECTION.headers,
         )
-
     return response.json()
 
 if __name__ == "__main__":

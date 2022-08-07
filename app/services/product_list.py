@@ -1,4 +1,3 @@
-import requests
 
 def get_products(CONNECTION, url, store_id):
     '''Функция отправляет GET-запрос, возвращая список товаров
@@ -18,8 +17,8 @@ def get_products(CONNECTION, url, store_id):
     response = CONNECTION.get(
             moditify_url, 
             )
-            
     data = response.json()
+    
     return data['products']    
 
 def make_path(*args):

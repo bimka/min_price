@@ -5,7 +5,7 @@ async function send_url(url, store_id, category_id) {
     // функция отправляет на сервер store_id и canonical_url 
     // подкатегории с продуктами
     data = [url, store_id];
-    const response = await fetch('https://localhost:8080/send_product_list', {
+    const response = await fetch('/send_product_list', {
       method: 'POST', 
       headers: {
           'Content-Type': 'application/json;charset=utf-8'
@@ -22,7 +22,6 @@ function rendering_markets_cards(products, category_id) {
     let div  = document.getElementById('products-' + category_id);
 
     products.forEach(product => {    
-        console.log(product);
         let div_card = document.createElement('div');  
         let image = product.image_urls[0]        
         div_card.innerHTML = `

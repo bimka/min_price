@@ -1,31 +1,28 @@
 import os
 from operator import itemgetter
-import uvicorn
 
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
-from typing import List
 from dotenv import load_dotenv
-from requests import request
 
-import session 
-import sbermarket_parser as sb_p
-import product_categories as p_cat
-import product_list as p_list
-import product_in_other_stores as p_other_stores
-import push_product_list as ppl
+
+from .services import session
+from .services import sbermarket_parser as sb_p
+from .services import product_categories as p_cat
+from .services import product_list as p_list
+from .services import product_in_other_stores as p_other_stores
+import app.services.push_product_list as ppl
 
 
 load_dotenv()
 
-app = FastAPI(debug = True)
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app = FastAPI(debug=True)
+app.mount("/static", StaticFiles(directory="app/static", html=True), name="static")
 
-templates = Jinja2Templates(directory="")
+templates = Jinja2Templates(directory="app/static/urls/")
 
 origins = [
     "https://mindeliveryprice.ru/",
@@ -40,17 +37,6 @@ app.add_middleware(
     allow_headers=["*"],
     max_age=3600,
 )
-
-
-class Market(BaseModel):
-    id: str
-    store_id: int
-    name: str
-    logo_image: str
-    retailer: str
-
-class Product(BaseModel):
-    pass
 
 list_markets = []
 COORDS = ''
@@ -91,7 +77,7 @@ async def get_store_products(request: Request, market_id):
         if market['store_id'] == int(market_id):  
             categories = p_cat.get_categories(CONNECTION, market_id)          
             return templates.TemplateResponse(
-                "static/urls/store.html",
+                "store.html",
                 {"request": request, 
                 'categories': categories, 
                 'market': market, 
@@ -125,7 +111,6 @@ async def compare_order(order, request: Request):
             # в markets_true_set
             try:
                 info =   p_other_stores.get(CONNECTION, market['retailer']['slug'], market['store_id'], product)
-                print('info: ', info)
                 if info['product']['offer']['price']:
                     confirmed_prod.append(info)
                     total_price += float(info['product']['offer']['price'])
@@ -141,7 +126,7 @@ async def compare_order(order, request: Request):
     markets_true_set = sorted(markets_true_set, key=itemgetter(-1))
         
     return templates.TemplateResponse(
-                "static/urls/compare.html",
+                "compare.html",
                 {"request": request,
                 "markets_true_set": markets_true_set,
                 } 

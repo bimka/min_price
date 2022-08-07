@@ -11,11 +11,13 @@ header {
   font-size: 30px;
   font-weight: bold;
   color: black;
-  height: 150px;
 }
 
 #site_logo {
   text-align: left;
+  font-size: 30px;
+  font-weight: bold;
+  color: black;
 }
 
 .store_logo {
@@ -23,8 +25,11 @@ header {
   max-height: 100px;
 }
 
+.site_logo_href:active,
+.site_logo_href:hover,
 .site_logo_href {
   text-decoration: none;
+  color: black;
 }
 
 
@@ -98,6 +103,10 @@ a.market_info > img{
 .compare_list > .center {
   position: absolute; 
   right: 160px;
+}
+
+.product_list {
+  text-align: center;
 }
 
 

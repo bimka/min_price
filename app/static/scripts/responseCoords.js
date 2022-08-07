@@ -1,7 +1,6 @@
 async function responseCoords(coords) {
     // функция responseCoords отправляет на сервер координаты доставки
-    alert('func responseCoord has been worked');
-    let response = await fetch('https://mindeliveryprice.ru/', {
+    let response = await fetch('/', {
         method: 'POST', 
         mode: 'no-cors',
         headers: {
