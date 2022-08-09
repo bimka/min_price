@@ -131,7 +131,19 @@ async def compare_order(order, request: Request):
                 "markets_true_set": markets_true_set,
                 } 
     )
-    
+
+@app.get("/adminpanel/admin={login}&password={password}")
+async def admin_panel(login, password, request: Request):
+    ''' Административная панель
+    '''
+    if login != "admin" or password != "admin":
+        login = ""
+    return templates.TemplateResponse(
+        "admin_panel.html",
+        {"request": request, 
+        "login": login,
+        }
+        )    
 """
 @app.post("/push_product_list")
 async def push_product_list(request: Request):
