@@ -1,13 +1,15 @@
 import os
 from operator import itemgetter
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Depends, HTTPException, status
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from dotenv import load_dotenv
-
+from sqlalchemy.orm import Session
+from jose import JWTError, jwt
+from datetime import datetime, timedelta
 
 from .services import session
 from .services import sbermarket_parser as sb_p
@@ -15,9 +17,12 @@ from .services import product_categories as p_cat
 from .services import product_list as p_list
 from .services import product_in_other_stores as p_other_stores
 import app.services.push_product_list as ppl
-
+from .sql_app import crud, models, schemas
+from .sql_app.database import SessionLocal, engine
 
 load_dotenv()
+
+models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(debug=True)
 app.mount("/static", StaticFiles(directory="app/static", html=True), name="static")
@@ -40,6 +45,18 @@ app.add_middleware(
 
 list_markets = []
 COORDS = ''
+
+# Dependency
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 @app.get("/")
 async def get(request: Request):
@@ -144,6 +161,71 @@ async def admin_panel(login, password, request: Request):
         "login": login,
         }
         )    
+
+@app.post("/users/", response_model=schemas.User)
+def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
+    db_user = crud.get_user_by_email(db, email=user.email)
+    if db_user:
+        raise HTTPException(status_code=400, detail="Email already registered")
+    return crud.create_user(db=db, user=user)
+
+
+@app.get("/users/", response_model=list[schemas.User])
+def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    users = crud.get_users(db, skip=skip, limit=limit)
+    return users
+
+
+@app.get("/users/{user_id}", response_model=schemas.User)
+def read_user(user_id: int, db: Session = Depends(get_db)):
+    db_user = crud.get_user(db, user_id=user_id)
+    if db_user is None:
+        raise HTTPException(status_code=404, detail="User not found")
+    return db_user
+
+
+async def get_current_user(db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        payload = jwt.decode(token, crud.SECRET_KEY, algorithms=[crud.ALGORITHM])
+        username: str = payload.get("sub")
+        if username is None:
+            raise credentials_exception
+        token_data = username
+    except JWTError:
+        raise credentials_exception
+    user = crud.get_user(db, username=username)
+    if user is None:
+        raise credentials_exception
+    return user
+
+
+@app.post("/token", response_model=schemas.Token)
+async def login_for_access_token(db: Session = Depends(get_db), 
+                                 form_data: OAuth2PasswordRequestForm = Depends()):
+    user = crud.authenticate_user(db, form_data.username, form_data.password)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect username or password",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = crud.create_access_token(
+        data={"sub": user.username}, expires_delta=access_token_expires
+    )
+    return {"access_token": access_token, "token_type": "bearer"}
+
+
+@app.get("/users/me/", response_model=models.User)
+async def read_users_me(current_user: models.User = Depends(get_current_user)):
+    return current_user
+
+    
 """
 @app.post("/push_product_list")
 async def push_product_list(request: Request):

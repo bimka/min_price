@@ -101,3 +101,6 @@ zipp==3.7.0
 wheel
 SQLAlchemy
 alembic
+"python-jose[cryptography]"
+"passlib[bcrypt]"
+python-multipart
