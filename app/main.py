@@ -17,7 +17,7 @@ from .services import product_categories as p_cat
 from .services import product_list as p_list
 from .services import product_in_other_stores as p_other_stores
 import app.services.push_product_list as ppl
-from .sql_app import crud, models, schemas
+from .sql_app import models, crud, schemas
 from .sql_app.database import SessionLocal, engine
 
 load_dotenv()
@@ -164,11 +164,7 @@ async def admin_panel(login, password, request: Request):
 
 @app.post("/users/", response_model=schemas.User)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
-    db_user = crud.get_user_by_email(db, email=user.email)
-    if db_user:
-        raise HTTPException(status_code=400, detail="Email already registered")
-    return crud.create_user(db=db, user=user)
-
+    return crud.create_user(db = db, user = user)
 
 @app.get("/users/", response_model=list[schemas.User])
 def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
@@ -221,7 +217,7 @@ async def login_for_access_token(db: Session = Depends(get_db),
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-@app.get("/users/me/", response_model=models.User)
+@app.get("/users/me/", response_model=schemas.User)
 async def read_users_me(current_user: models.User = Depends(get_current_user)):
     return current_user
 
