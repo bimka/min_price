@@ -35,9 +35,9 @@ html5lib==1.1
 httplib2==0.20.4
 httplib2shim==0.0.3
 httptools==0.4.0
-#hyper==0.7.0
+hyper
 hypercorn==0.13.2
-hyperframe==6.0.1
+hyperframe
 idna>=2.5
 importlib-metadata==4.11.3
 isort==5.10.1
@@ -48,8 +48,6 @@ lockfile==0.12.2
 MarkupSafe==2.1.1
 mccabe==0.6.1
 msgpack==1.0.3
-numpy==1.22.4
-opencv-python==4.6.0.66
 outcome==1.2.0
 packaging==20.9
 pastel==0.2.1
@@ -99,8 +97,3 @@ wrapt==1.13.3
 wsproto==1.1.0
 zipp==3.7.0
 wheel
-SQLAlchemy
-alembic
-"python-jose[cryptography]"
-"passlib[bcrypt]"
-python-multipart

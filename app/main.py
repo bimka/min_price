@@ -16,7 +16,7 @@ from .services import sbermarket_parser as sb_p
 from .services import product_categories as p_cat
 from .services import product_list as p_list
 from .services import product_in_other_stores as p_other_stores
-import app.services.push_product_list as ppl
+from .services import push_product_list as ppl
 from .sql_app import models, crud, schemas
 from .sql_app.database import SessionLocal, engine
 
